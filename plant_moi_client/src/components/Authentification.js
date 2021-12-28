@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import connexionImg from '../img/connexion.png';
 
 class Authentification extends Component {
 
@@ -9,7 +10,7 @@ class Authentification extends Component {
   render() {
     return (
         <div class="connexion"> 
-            <img src="../../img/connexion.png" width="90px" height="90px"/>
+            <img src={connexionImg} width="90px" height="90px"/>
         </div>
     )
   }
