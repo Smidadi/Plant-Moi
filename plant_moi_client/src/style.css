@@ -1,16 +1,14 @@
 .bar {
-    display: inline-flex;
     /*background: linear-gradient(to right, rgb(23, 107, 23), rgb(123, 155, 65));*/
     /*background: linear-gradient(blue, 10%, pink);*/
     background: linear-gradient(60deg, rgb(23, 107, 23), rgb(123, 155, 65));
-    width: 100%;
 
     /*padding-top: 15px;
     padding-bottom: 15px;*/
 }
 
 .research {
-    /*margin-top: 4%;*/
+    margin-top: 4%;
     margin-bottom: 4%;
     font-family: "Open Sans";
     font-weight: lighter;
@@ -41,11 +39,11 @@ input[type=text] {
  }
 
 .connexion {
+    border-left: 2px solid;
+    border-color: white;
+    
     margin-top: 2%;
     margin-bottom: 2%;
     padding-left:5%;
-
-    position: absolute;
-    left: 90%;
 
 }

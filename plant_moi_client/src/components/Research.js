@@ -20,12 +20,12 @@ class Research extends Component {
 
   render() {
     return (
-        <div class="research">
+        <div class="col-9 research">
             <img src={logo} width="40px" height="40px"/> Plant&Moi
             <input type="text" id="searchbar" name="search" onChange={this.searchBarValue} value={this.state.inputValue} placeholder={this.state.researchPlant}/>
         </div>
     )
-  }
+  }  
 }
 
 export default Research;

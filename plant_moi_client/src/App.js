@@ -4,8 +4,12 @@ import PageRecherche from './components/PageRecherche.js'
 
 function App() {
   return (
-    <div>
-      <PageRecherche />
+    <div class="container-fluid">
+      <div class="row bar"> 
+        <div class="container">
+            <PageRecherche />
+        </div>
+      </div>
     </div>
   );
 }
