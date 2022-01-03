@@ -15,12 +15,11 @@ class Research extends Component {
     this.setState({
       inputValue: event.target.value
     });
-    console.log(this.state.inputValue);
   }
 
   render() {
     return (
-        <div class="col-9 research">
+        <div className="col-9 research">
             <img src={logo} width="40px" height="40px"/> Plant&Moi
             <input type="text" id="searchbar" name="search" onChange={this.searchBarValue} value={this.state.inputValue} placeholder={this.state.researchPlant}/>
         </div>

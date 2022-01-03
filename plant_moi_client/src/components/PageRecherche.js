@@ -11,9 +11,15 @@ class PageRecherche extends Component {
 
     render() {
         return (
-            <div class="row">
-                <Research />
-                <Authentification />
+            <div className="container-fluid">
+                <div className="row bar"> 
+                    <div className="container">
+                        <div className="row">
+                            <Research />
+                            <Authentification />
+                        </div>
+                    </div>
+                </div>
             </div>
         )
       }

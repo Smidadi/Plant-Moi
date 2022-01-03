@@ -1,16 +1,17 @@
 import './App.css';
 import Header from './components/Header.js'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PageRecherche from './components/PageRecherche.js'
+import PageConnexion from './components/PageConnexion';
 
 function App() {
   return (
-    <div class="container-fluid">
-      <div class="row bar"> 
-        <div class="container">
-            <PageRecherche />
-        </div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PageRecherche />} />
+        <Route path='/Connexion' element={<PageConnexion />} /> 
+      </Routes>
+    </BrowserRouter>
   );
 }
 

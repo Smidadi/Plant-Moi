@@ -9,7 +9,7 @@ class Authentification extends Component {
 
   render() {
     return (
-        <div class="col-3 connexion"> 
+        <div className="col-3 connexion"> 
             <img src={connexionImg} width="90px" height="90px"/>
         </div>
     )
