@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import '../style.css';
-import PasswordField from './PasswordField';
-import UsernameField from './UsernameField';
+import Field from './Field';
 import Logo from './Logo';
 
 class PageConnexion extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            submit: false
+        }
+    }
+
     render() {
         return (
             <div className="container-fluid">
@@ -17,16 +23,15 @@ class PageConnexion extends Component {
                 </div>
             </div>
             <div className='container'>
-                <UsernameField />
+                <Field submit={this.state.submit} type='username'/>
                 <br />
-                <PasswordField text='Mot de passe'/>
+                <Field submit={this.state.submit} type='password'/>
                 <br />
-                <button type="submit" className="form-control btn btn-primary">Submit</button>
+                <button type="submit" onClick={() => this.setState({submit: true})} className="form-control btn btn-primary">Submit</button>
                 <div className="dropdown-divider"></div>
                 <Link to="/Inscription">
                     <p>Nouveau ? Inscrit toi !</p>
                 </Link>
-
             </div>
         </div>
         )
