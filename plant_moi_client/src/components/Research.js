@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from "../img/logo.png"
+import Logo from './Logo';
 
 class Research extends Component {
 
@@ -20,7 +20,7 @@ class Research extends Component {
   render() {
     return (
         <div className="col-9 research">
-            <img src={logo} width="40px" height="40px"/> Plant&Moi
+            <Logo />
             <input type="text" id="searchbar" name="search" onChange={this.searchBarValue} value={this.state.inputValue} placeholder={this.state.researchPlant}/>
         </div>
     )
