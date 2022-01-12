@@ -9,15 +9,14 @@ class PageRecherche extends Component {
         super(props)
         this.state = {
             resultResearch:'',
-            inputValue:'',
-            submit:false
+            inputValue:'Michel',
+            submit: false
         }
     }
 
-    searchBarValue = (val) => {
+    searchBarValue = (value) => {
         this.setState({
-          inputValue: val,
-          submit: true
+          inputValue: value
         });
     }
 
@@ -33,7 +32,7 @@ class PageRecherche extends Component {
                     </div>  
                 </div>
                 <div className="row">
-                    <Api submit={this.state.submit} inputValue={this.state.inputValue} searchBarValue={this.searchBarValue}/>
+                    <Api inputValue={this.state.inputValue} searchBarValue={this.searchBarValue}/>
                 </div>
             </div>
         )
