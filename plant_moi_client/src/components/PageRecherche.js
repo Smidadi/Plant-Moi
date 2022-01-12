@@ -9,7 +9,7 @@ class PageRecherche extends Component {
         super(props)
         this.state = {
             resultResearch:'',
-            inputValue:'Michel',
+            inputValue:'Pilea',
             submit: false
         }
     }
@@ -31,7 +31,7 @@ class PageRecherche extends Component {
                         </div>
                     </div>  
                 </div>
-                <div className="row">
+                <div className="col">
                     <Api inputValue={this.state.inputValue} searchBarValue={this.searchBarValue}/>
                 </div>
             </div>

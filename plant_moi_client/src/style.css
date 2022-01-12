@@ -47,3 +47,11 @@ input[type=text] {
     padding-left:5%;
 
 }
+
+.plantInfo {
+    margin:2%;
+}
+
+.structInfo {
+    font-weight:bold;
+}

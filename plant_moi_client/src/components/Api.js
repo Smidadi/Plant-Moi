@@ -7,13 +7,28 @@ class Api extends Component {
     constructor(props){
         super(props)
         this.state = {
-            name:''
+            key:'',
+            name:'',
+            scientificName:'',
+            family:'',
+            statePlant:''
         }
     }
 
     componentDidMount = () => {
-        fetch("https://api.gbif.org/v1/occurrence/3042966788").then((res) => res.json()).then((json) => {
-            this.setState({name:json.species}); 
+        fetch("https://api.gbif.org/v1/species/match?name=Pilea").then((res) => res.json()).then((json) => {
+            this.setState({
+                key:json.usageKey,
+                name:json.canonicalName, 
+                scientificName:json.scientificName,               
+                family:json.family
+            }); 
+        })
+
+        fetch("https://api.gbif.org/v1/occurrence/search?taxonKey=2984417").then((res) => res.json()).then((json) => {
+            this.setState({
+                statePlant:json.results[1].stateProvince
+            }); 
         })
     }
 
@@ -30,12 +45,21 @@ class Api extends Component {
             .then((res) =>res.json())
             .then((json) => {
                 this.setState({
-                    name:json.canonicalName
+                    key:json.usageKey,
+                    name:json.canonicalName,
+                    scientificName:json.scientificName,   
+                    family:json.family
                 });   
-                console.log(this.state.name);         
             });
-        }
-        
+
+            fetch("https://api.gbif.org/v1/occurrence/search?taxonKey=" + this.state.key)
+            .then((res) => res.json())
+            .then((json) => {
+                this.setState({
+                    statePlant:json.results[1].stateProvince
+                }); 
+            })
+        }     
     }
     // componentDidUpdate = () => {
     //     if(this.props.submit) {
@@ -53,8 +77,11 @@ class Api extends Component {
 
     render() {
         return (
-            <div>
-                {this.state.name} {this.props.inputValue}
+            <div className="plantInfo"> 
+                <div className="row"> <div className="structInfo">Nom :&nbsp;</div>{this.state.name} </div>
+                <div className="row"> <div className="structInfo">Nom scientifique :&nbsp;</div>{this.state.scientificName} </div>
+                <div className="row"> <div className="structInfo">Famille :&nbsp;</div> {this.state.family} </div>
+                <div className="row"> <div className="structInfo">Province :&nbsp;</div>{this.state.statePlant} </div>
             </div>
         )
       }
