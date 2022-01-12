@@ -7,14 +7,7 @@ class Research extends Component {
     super(props);
     this.state = { 
       researchPlant: 'Rechercher une plante',
-      inputValue: ''
     };
-  }
-
-  searchBarValue = (event) => {
-    this.setState({
-      inputValue: event.target.value
-    });
   }
 
   render() {
