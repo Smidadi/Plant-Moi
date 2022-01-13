@@ -8,11 +8,53 @@ class PageInscription extends Component {
     constructor(props){
         super(props);
         this.state = {
+            username: '',
+            email: '',
+            password: '',
+            CPassword: '',
             submit: false
         }
     }
 
+    updateUserInfo = (type,value) => {
+        switch(type){
+            case 'password':
+                this.setState({
+                    password: value
+                })
+                break;
+            case 'username':
+                this.setState({
+                    username: value
+                })
+                break;
+            case 'passwordConfirm' :
+                this.setState({
+                    CPassword: value
+                })
+                break;
+            default :
+                this.setState({
+                    email: value
+                })
+                break;
+        }
+        this.setState({
+            submit:false
+        })
+    }
+    
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.setState({
+            submit:true
+        })
+    }
 
+    componentDidUpdate = () => {
+        if(!this.state.submit)
+            console.log(this.state);
+    }
 
     render() {
         return (
@@ -25,23 +67,25 @@ class PageInscription extends Component {
                     </div>
                 </div>
                 <div className='container'>
-                    <Field submit={this.state.submit} type='username' new={true}/>
-                    <br />
-                    <Field submit={this.state.submit} type='email' new={true}/>
-                    <br />
-                    <Field submit={this.state.submit} type='password' new={true}/>
-                    <br />
-                    <Field submit={this.state.submit} type='passwordConfirm' new={true}/>
-                    <br />
-                    <button type="submit" onClick={() => this.setState({submit: true})}className="form-control btn btn-primary">Submit</button>
-                    <div className="dropdown-divider"></div>
+                    <form onSubmit={this.handleSubmit}>
+                        <Field submit={this.state.submit} type='username' userInfo={this.state.username} updateUserInfo={this.updateUserInfo}/>
+                        <br />
+                        <Field submit={this.state.submit} type='email' new={true} userInfo={this.state.email} updateUserInfo={this.updateUserInfo}/>
+                        <br />
+                        <Field submit={this.state.submit} type='password' new={true} userInfo={this.state.password} updateUserInfo={this.updateUserInfo}/>
+                        <br />
+                        <Field submit={this.state.submit} type='passwordConfirm' userInfo={this.state.CPassword} updateUserInfo={this.updateUserInfo}/>
+                        <br />
+                        <button type="submit" className="form-control btn btn-primary">Submit</button>
+                        <div className="dropdown-divider"></div>
+                    </form>
                     <Link to="/Connexion">
                         <p>Déjà inscrit ? Connectes toi !</p>
                     </Link>
                 </div>
             </div>
         )
-      }
     }
+}
 
 export default PageInscription;

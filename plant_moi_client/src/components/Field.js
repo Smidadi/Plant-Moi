@@ -47,9 +47,7 @@ class Field extends Component {
 
     componentDidUpdate = () => {
         if(this.props.submit){
-            if(this.props.new){
-                //TODO
-            }
+            this.props.updateUserInfo(this.props.type,this.state.inputValue);
         }
     }
     
@@ -60,7 +58,8 @@ class Field extends Component {
                 <input type={this.state.type} className='form-control' onChange={this.takeInputValue}/>
             </>
         )
-      }
     }
+}
+
 
 export default Field;
