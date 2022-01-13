@@ -17,7 +17,10 @@ class Research extends Component {
 
   handleKeyDown = (event) => {
     if(event.key === 'Enter') {
-      this.props.searchBarValue(this.state.inputValue);
+      let res = this.state.inputValue.toLowerCase();
+      res = res.charAt(0).toUpperCase() + res.slice(1);
+      console.log(this.state.inputValue, res)
+      this.props.searchBarValue(res);
     }
   }
 
