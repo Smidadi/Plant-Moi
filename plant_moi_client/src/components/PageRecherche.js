@@ -31,7 +31,7 @@ class PageRecherche extends Component {
                         </div>
                     </div>  
                 </div>
-                <div className="col">
+                <div className="row">
                     <Api inputValue={this.state.inputValue} searchBarValue={this.searchBarValue}/>
                 </div>
             </div>
