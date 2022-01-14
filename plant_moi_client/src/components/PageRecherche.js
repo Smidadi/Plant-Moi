@@ -4,6 +4,8 @@ import Research from './Research';
 import Authentification from './Authentification';
 import Api from './Api';
 
+import UserProfile from '../UserProfile';
+
 class PageRecherche extends Component {
     constructor(props){
         super(props)
@@ -16,12 +18,8 @@ class PageRecherche extends Component {
 
     searchBarValue = (value) => {
         this.setState({
-          inputValue: value
+            inputValue: value
         });
-    }
-
-    componentDidMount = () => {
-        console.log(this.props.username+ "   here");
     }
 
     render() {
