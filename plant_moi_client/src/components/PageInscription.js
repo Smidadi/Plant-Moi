@@ -52,8 +52,18 @@ class PageInscription extends Component {
     }
 
     componentDidUpdate = () => {
-        if(!this.state.submit)
-            console.log(this.state);
+        if(!this.state.submit){
+            fetch('http://localhost:5000/inscription',{
+                method: 'post',
+                body: {
+                    "username": this.state.username,
+                    "password": this.state.password,
+                    "CPassword": this.state.CPassword,
+                    "email": this.state.email
+                    }
+            })
+            .then((res) => console.log(res.json))
+        }
     }
 
     render() {

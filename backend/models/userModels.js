@@ -7,3 +7,4 @@ const userSchema = new mongoose.Schema({
     favoritePlant: { type: Object}
 });
 
+module.exports = mongoose.model('User', userSchema);
