@@ -61,7 +61,7 @@ class Api extends Component {
                 .then((json) => {
                     let resultsLen = Object.keys(json.results).length
                     let i = 0
-                    while(Object.keys(json.results[i].media).length === 0 && i <= 20){
+                    while(Object.keys(json.results[i].media).length === 0 && i <= resultsLen){
                         i++
                     }
                     this.setState({
