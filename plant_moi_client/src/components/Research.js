@@ -19,7 +19,6 @@ class Research extends Component {
     if(event.key === 'Enter') {
       let res = this.state.inputValue.toLowerCase();
       res = res.charAt(0).toUpperCase() + res.slice(1);
-      console.log(this.state.inputValue, res)
       this.props.searchBarValue(res);
     }
   }

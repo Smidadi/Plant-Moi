@@ -41,8 +41,7 @@ class Api extends Component {
                 statePlant:json.results[1].stateProvince,
                 img:json.results[11].media[0].identifier,
                 latlng:[json.results[0].decimalLatitude, json.results[0].decimalLongitude]
-            }); 
-            console.log(json.results[0])
+            });
         })
     }
 
@@ -60,9 +59,14 @@ class Api extends Component {
                 fetch("https://api.gbif.org/v1/occurrence/search?taxonKey=" + this.state.key)
                 .then((res) => res.json())
                 .then((json) => {
+                    let resultsLen = Object.keys(json.results).length
+                    let i = 0
+                    while(Object.keys(json.results[i].media).length === 0 && i <= 20){
+                        i++
+                    }
                     this.setState({
-                        statePlant:json.results[1].stateProvince,
-                        img:json.results[11].media[0].identifier
+                        statePlant:json.results[i].stateProvince,
+                        img:json.results[i].media[0].identifier
                     }); 
                 })  
             })
