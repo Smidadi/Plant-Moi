@@ -18,16 +18,20 @@ class Api extends Component {
             img:'',
             url:'http://purl.org/dc/terms/identifier',
             like:like,
-            love:love
+            love:love,
+            latlng:[]
         }
     }
 
     componentDidMount = () => {
         fetch("https://api.gbif.org/v1/species/match?name=Pilea").then((res) => res.json()).then((json) => {
+            let scName = json.scientificName;
+            if(scName === "" || scName === undefined)
+                scName = json.acceptedScientificName
             this.setState({
                 key:json.usageKey,
                 name:json.canonicalName, 
-                scientificName:json.scientificName,               
+                scientificName:scName,               
                 family:json.family
             }); 
         })
@@ -35,8 +39,10 @@ class Api extends Component {
         fetch("https://api.gbif.org/v1/occurrence/search?taxonKey=2984417").then((res) => res.json()).then((json) => {
             this.setState({
                 statePlant:json.results[1].stateProvince,
-                img:json.results[11].media[0].identifier
+                img:json.results[11].media[0].identifier,
+                latlng:[json.results[0].decimalLatitude, json.results[0].decimalLongitude]
             }); 
+            console.log(json.results[0])
         })
     }
 
@@ -99,7 +105,7 @@ class Api extends Component {
             </div>
             <div className="plantInfo col-6"> 
                 <div className="row">
-                <MapWrapper />
+                <MapWrapper LatLong={this.state.latlng}/>
                 </div>
             </div>
             </>

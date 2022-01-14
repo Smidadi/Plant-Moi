@@ -8,7 +8,7 @@ class MapWrapper extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { center: [0, 0], zoom: 1 };
+    this.state = { center: [this.props.LatLong[0], this.props.LatLong[1]], zoom: 3 };
 
     this.olmap = new OlMap({
       target: null,
@@ -20,7 +20,7 @@ class MapWrapper extends Component {
       view: new OlView({
         center: this.state.center,
         zoom: this.state.zoom
-      })
+      }),
     });
   }
 
