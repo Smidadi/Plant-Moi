@@ -74,14 +74,12 @@ class Api extends Component {
                 <button type="button" className="btn"><img src={plus} width="50px" height="50px"/></button> <button type="button">AIME MOI</button> 
             </div>
             
-            <div className="plantInfo"> 
-                <div className="col-6"> 
-                    <div className="row"> <img src={this.state.img} width="50%" height="50%"/> </div>
-                </div>
-                <div className="col-6"> 
-                    <div className="row">
-                    <MapWrapper />
-                    </div>
+            <div className="col-6"> 
+                <div className="row"> <img src={this.state.img} width="50%" height="50%"/> </div>
+            </div>
+            <div className="col-6"> 
+                <div className="row">
+                <MapWrapper />
                 </div>
             </div>
             </>
