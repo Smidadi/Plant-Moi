@@ -69,15 +69,17 @@ class Api extends Component {
                     name:json.canonicalName,
                     scientificName:json.scientificName,   
                     family:json.family
-                }); 
+                });
                 fetch("https://api.gbif.org/v1/occurrence/search?taxonKey=" + this.state.key)
                 .then((res) => res.json())
                 .then((json) => {
                     let resultsLen = Object.keys(json.results).length
                     let i = 0
-                    while(Object.keys(json.results[i].media).length === 0 && i <= resultsLen){
-                        i++
-                    }
+                    try {
+                        while(Object.keys(json.results[i].media).length === 0 && i <= resultsLen){
+                            i++
+                        }
+                    } catch(error) {}
                     if(i === resultsLen) { //Aucune image dispo
                         this.setState({
                             statePlant:json.results[0].stateProvince,
