@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Link, Navigate } from "react-router-dom";
 import '../style.css';
 import Field from './Field';
@@ -55,8 +54,9 @@ class PageConnexion extends Component {
     }
 
     render() {
-        if(this.state.connected)
+        if(this.state.connected){
             return  <Navigate push to="/" />;
+        }
         return (
             <div className="container-fluid">
                 <div className="row bar"> 

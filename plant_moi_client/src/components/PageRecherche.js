@@ -20,6 +20,10 @@ class PageRecherche extends Component {
         });
     }
 
+    componentDidMount = () => {
+        console.log(this.props.username+ "   here");
+    }
+
     render() {
         return (
             <div className="container-fluid">
