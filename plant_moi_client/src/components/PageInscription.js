@@ -76,7 +76,7 @@ class PageInscription extends Component {
 
     render() {
         if(this.state.connected)
-            return  <Navigate push to="/" />;
+            return  <Navigate push to="/Connexion" />;
         return (
             <div className="container-fluid">
                 <div className="row bar"> 
