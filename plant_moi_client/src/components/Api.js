@@ -1,7 +1,10 @@
 import React, { Component, useEffect } from 'react';
 import MapWrapper from '../components/MapWrapper';
 import '../style.css';
-import plus from "../img/plus.png"
+import like from "../img/like.png"
+import is_liked from "../img/is_liked.png"
+import love from "../img/love.png"
+import is_loved from "../img/is_loved.png"
 
 class Api extends Component {
     constructor(props){
@@ -13,7 +16,9 @@ class Api extends Component {
             family:'',
             statePlant:'',
             img:'',
-            url:'http://purl.org/dc/terms/identifier'
+            url:'http://purl.org/dc/terms/identifier',
+            like:like,
+            love:love
         }
     }
 
@@ -58,26 +63,41 @@ class Api extends Component {
         }     
     }
 
+    changeLike = () => { 
+        if(this.state.like == like)
+            this.setState({like: is_liked})
+        else 
+            this.setState({like: like})
+    }
+
+    changeLove = () => { 
+        if(this.state.love == love)
+            this.setState({love: is_loved})
+        else 
+            this.setState({love: love})
+    }
+
 
     /* A regler ici : si pas d'images -> ne pas l'afficher ; si plante pas dans l'api : ne rien mettre dans les champs ou message d'erreur ; mettre un bouton favoris pour l'ajouter dans la page de profil ; mettre un bouton add pour la mettre dans notre liste de plante dans profil */
 
     render() {
         return (
             <>
-            <div className="plantInfo col-10"> 
+            <div className="plantInfo col-11"> 
                 <div className="row"> <div className="structInfo">Nom :&nbsp;</div>{this.state.name} </div>
                 <div className="row"> <div className="structInfo">Nom scientifique :&nbsp;</div>{this.state.scientificName} </div>
                 <div className="row"> <div className="structInfo">Famille :&nbsp;</div> {this.state.family} </div>
                 <div className="row"> <div className="structInfo">Province :&nbsp;</div>{this.state.statePlant} </div>
             </div>
-            <div className="plantInfo col-2">
-                <button type="button" className="btn"><img src={plus} width="50px" height="50px"/></button> <button type="button">AIME MOI</button> 
+            <div className="plantInfo col-1">
+                <button type="button" className="like_and_love" onClick={() => this.changeLove()} ><img src={this.state.love} width="50px" height="50px"/></button> 
+                <button type="button" className="like_and_love" onClick={() => this.changeLike()} ><img src={this.state.like} width="50px" height="50px"/></button> 
             </div>
             
-            <div className="col-6"> 
+            <div className="plantInfo col-6"> 
                 <div className="row"> <img src={this.state.img} width="50%" height="50%"/> </div>
             </div>
-            <div className="col-6"> 
+            <div className="plantInfo col-6"> 
                 <div className="row">
                 <MapWrapper />
                 </div>
