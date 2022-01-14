@@ -55,7 +55,7 @@ class PageConnexion extends Component {
 
     render() {
         if(this.state.connected){
-            return  <Navigate push to="/" />;
+            return  <Navigate push to="/Profil" />;
         }
         return (
             <div className="container-fluid">
