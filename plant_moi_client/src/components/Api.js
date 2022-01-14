@@ -1,4 +1,5 @@
 import React, { Component, useEffect } from 'react';
+import MapWrapper from '../components/MapWrapper';
 import '../style.css';
 import plus from "../img/plus.png"
 
@@ -75,11 +76,11 @@ class Api extends Component {
             
             <div className="plantInfo"> 
                 <div className="col-6"> 
-                    <div className="row"> <img src={this.state.img}width="50%" height="50%"/> </div>
+                    <div className="row"> <img src={this.state.img} width="50%" height="50%"/> </div>
                 </div>
                 <div className="col-6"> 
                     <div className="row">
-                        {/*TODO : map*/}
+                    <MapWrapper />
                     </div>
                 </div>
             </div>
