@@ -64,10 +64,18 @@ class Api extends Component {
                     while(Object.keys(json.results[i].media).length === 0 && i <= resultsLen){
                         i++
                     }
-                    this.setState({
-                        statePlant:json.results[i].stateProvince,
-                        img:json.results[i].media[0].identifier
-                    }); 
+                    if(i === resultsLen) { //Aucune image dispo
+                        this.setState({
+                            statePlant:json.results[0].stateProvince,
+                            img:undefined
+                        });    
+                    } else {
+                        this.setState({
+                            statePlant:json.results[i].stateProvince,
+                            img:json.results[i].media[0].identifier
+                        });
+                    }
+
                 })  
             })
         }     
@@ -105,7 +113,7 @@ class Api extends Component {
             </div>
             
             <div className="plantInfo col-6"> 
-                <div className="row"> <img src={this.state.img} width="50%" height="50%"/> </div>
+                <div className="row"> {this.state.img === undefined ? <p>RIEN</p> :<img src={this.state.img} width="50%" height="50%"/>} </div>
             </div>
             <div className="plantInfo col-6"> 
                 <div className="row">
