@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import '../style.css';
 import Logo from './Logo';
 import Field from './Field';
@@ -8,6 +8,7 @@ class PageInscription extends Component {
     constructor(props){
         super(props);
         this.state = {
+            connected:false,
             username: '',
             email: '',
             password: '',
@@ -51,22 +52,31 @@ class PageInscription extends Component {
         })
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate = async () => {
         if(!this.state.submit){
-            fetch('http://localhost:5000/inscription',{
-                method: 'post',
-                body: {
-                    "username": this.state.username,
-                    "password": this.state.password,
-                    "CPassword": this.state.CPassword,
-                    "email": this.state.email
-                    }
+            await fetch('http://localhost:5000/user/Inscription',{
+                method: 'POST',
+                headers:  { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userName: this.state.username,
+                    password: this.state.password,
+                    CPassword: this.state.CPassword,
+                    email: this.state.email
+                    })
             })
-            .then((res) => console.log(res.json))
+            .then(async (res) => {
+                const response = (await res.text()).toString();
+                this.setState({
+                    connected: (response === 'Added'? true:false)
+                });
+            })
+            .catch(async (res) => await console.log(res));
         }
     }
 
     render() {
+        if(this.state.connected)
+            return  <Navigate push to="/" />;
         return (
             <div className="container-fluid">
                 <div className="row bar"> 
@@ -80,9 +90,9 @@ class PageInscription extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <Field submit={this.state.submit} type='username' userInfo={this.state.username} updateUserInfo={this.updateUserInfo}/>
                         <br />
-                        <Field submit={this.state.submit} type='email' new={true} userInfo={this.state.email} updateUserInfo={this.updateUserInfo}/>
+                        <Field submit={this.state.submit} type='email' userInfo={this.state.email} updateUserInfo={this.updateUserInfo}/>
                         <br />
-                        <Field submit={this.state.submit} type='password' new={true} userInfo={this.state.password} updateUserInfo={this.updateUserInfo}/>
+                        <Field submit={this.state.submit} type='password' userInfo={this.state.password} updateUserInfo={this.updateUserInfo}/>
                         <br />
                         <Field submit={this.state.submit} type='passwordConfirm' userInfo={this.state.CPassword} updateUserInfo={this.updateUserInfo}/>
                         <br />

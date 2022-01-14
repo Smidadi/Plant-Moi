@@ -2,23 +2,38 @@ const router = require('express').Router();
 const userControl = require('../src/userConroller');
 const userData = require('../models/userModels');
 
-router.post('/inscription', async (req,res) => {
-    const response = userControl.verifyInformation(req.body);
-    console.log(response);
-    delete req.body._id;
-    const t = new userData({
-        ...req.body
-    });
-    t.save().then( () => console.log("here")).catch(() => console.log('failed'))
-    res.end()
+router.post('/Inscription', async (req,res) => {
+    await userData.find()
+            .then((users) => {
+                if((users.filter( (x) => x.userName == req.body.userName)).length === 0 & userControl.verifyInformation(req.body)){
+                    delete req.body._id;
+                    const user = new userData({
+                    ...req.body
+                    });
+                    user.save()
+                        .then( () => {
+                            res.send('Added');
+                        })
+                        .catch(() => {
+                            res.send("Failed");
+                        });
+                }
+            })
+            .catch(() => res.send({message:"Failed"}))
 });
 
 
-router.get('/inscription', async (req,res) => {
-    userData.find()
-    .then(user => console.log(user))
-    .catch(() => console.log('error'))
-    res.end();
+router.get('/Connexion/:userName/:password', async (req,res) => {
+    await userData.find()
+            .then((users) => {
+                if((users.filter( (x) => x.userName == req.params.userName & x.password == req.params.password)).length !== 0){
+                    res.send('In');
+                }else{
+                    res.send('Not in');  
+                }
+            })
+            .catch(() => res.send({message:"Failed"}))
+    
 });
 
 module.exports = router;
