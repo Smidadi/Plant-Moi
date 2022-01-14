@@ -26,14 +26,15 @@ class Research extends Component {
   }
 
   suggests = () => {
-    
-    console.log(this.state.inputValue)
     fetch("https://api.gbif.org/v1/species/suggest?q=%22" + this.state.inputValue + "%22")
     .then((res) => res.json())
     .then((json) => {
       let tab = []
-      for(let i = 0; i<Object.keys(json).length; ++i)
+      for(let i = 0; i<Object.keys(json).length && i<5; ++i)
         tab.push(json[i].canonicalName)
+      tab = tab.filter(function(ele , pos){
+        return tab.indexOf(ele) == pos;
+    })
       this.setState({propositions:tab})
     }) 
   }
