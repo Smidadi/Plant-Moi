@@ -27,16 +27,15 @@
 }
 
 input[type=text] {
-    width: 30%;
     -webkit-transition: width 0.15s ease-in-out;
     transition: width 0.15s ease-in-out;
  }
 
  /* When the input field gets focus,
-      change its width to 100% */
+      change its width to 100%
  input[type=text]:focus {
    width: 70%;
- }
+ }*/
 
 .connexion {
     border-left: 2px solid;
@@ -98,4 +97,28 @@ input[type=text] {
 
 body {
     background-image: url("./img/fond11.jpg");
+}
+
+.textColor {
+    color:green;
+}
+
+.textColor:link {
+    color:green;
+    text-decoration: underline green;
+}
+
+.textColor:hover {
+    color:green;
+    text-decoration: underline green;
+}
+
+.textColor:active {
+    color:green;
+    text-decoration: underline green;
+}
+
+a
+{
+text-decoration: none;
 }
