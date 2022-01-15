@@ -27,16 +27,15 @@
 }
 
 input[type=text] {
-    width: 30%;
     -webkit-transition: width 0.15s ease-in-out;
     transition: width 0.15s ease-in-out;
  }
 
  /* When the input field gets focus,
-      change its width to 100% */
+      change its width to 100%
  input[type=text]:focus {
    width: 70%;
- }
+ }*/
 
 .connexion {
     border-left: 2px solid;
@@ -61,11 +60,13 @@ input[type=text] {
     text-align: center;
     border: none; 
     cursor: pointer;
+    background: none;
 }
 
 .like_and_love:focus {
     border: none;
     outline: none;
+    background: none;
 }
 
 .marker {
@@ -94,9 +95,34 @@ input[type=text] {
     margin-top: 100px;
 }
 
-.alert {
-    padding: 20px;
-    background-color: #f44336; /* Red */
-    color: white;
-    margin-bottom: 15px;
-  }
+.deco {
+    margin-left: 20px;
+}
+
+body {
+    background-image: url("./img/fond11.jpg");
+}
+
+.textColor {
+    color:green;
+}
+
+.textColor:link {
+    color:green;
+    text-decoration: underline green;
+}
+
+.textColor:hover {
+    color:green;
+    text-decoration: underline green;
+}
+
+.textColor:active {
+    color:green;
+    text-decoration: underline green;
+}
+
+a
+{
+text-decoration: none;
+}

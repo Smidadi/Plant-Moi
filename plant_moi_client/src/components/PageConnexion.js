@@ -73,16 +73,16 @@ class PageConnexion extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='container formulaire'>
+                <div className="container formulaire textColor">
                     <form onSubmit={this.handleSubmit}>
                         <Field submit={this.state.submit} type='username' userInfo={this.state.username} updateUserInfo={this.updateUserInfo}/>
                         <br />
                         <Field submit={this.state.submit} type='password' userInfo={this.state.password} updateUserInfo={this.updateUserInfo}/>
                         <br />
-                        <button type="submit" onClick={() => this.setState({submit: true})} className="form-control btn btn-primary">Submit</button>
+                        <button type="submit" onClick={() => this.setState({submit: true})} className="form-control btn btn-success">Submit</button>
                         <div className="dropdown-divider"></div>
                         <Link to="/Inscription">
-                            <p>Nouveau ? Inscrit toi !</p>
+                            <p className="textColor">Nouveau ? Inscrit toi !</p>
                         </Link>
                     </form>
                 </div>
