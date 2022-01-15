@@ -131,11 +131,11 @@ class Api extends Component {
             </div>
             
             <div className="plantInfo col-6"> 
-                <div className="row"> {this.state.img === undefined ? <p>RIEN</p> :<img src={this.state.img} width="50%" height="50%"/>} </div>
+                <div className="row"> {this.state.img === undefined ? <div className="noImage"><span>Pas d'image pour cette plante</span></div> :<img src={this.state.img} width="50%" height="50%"/>} </div>
             </div>
             <div className="plantInfo col-6"> 
                 <div className="row">
-                <SimpleMap LatLong={{lat: this.state.latlng[0],lng: this.state.latlng[1]}} zoom={4}/>
+                <SimpleMap LatLong={{lat: this.state.latlng[0],lng: this.state.latlng[1]}} zoom={3}/>
                 </div>
             </div>
             </>

@@ -73,7 +73,7 @@ class PageConnexion extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='container'>
+                <div className='container formulaire'>
                     <form onSubmit={this.handleSubmit}>
                         <Field submit={this.state.submit} type='username' userInfo={this.state.username} updateUserInfo={this.updateUserInfo}/>
                         <br />
