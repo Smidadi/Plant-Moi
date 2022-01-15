@@ -3,12 +3,43 @@ const connectDb = require('./config/db');
 const cors = require('cors');
 const user = require('./routes/userRoutes');
 
-const app = express();
-app.use(cors());
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+
 connectDb();
+
+const app = express();
+
+app.use(express.json());
+app.use(cors({
+    origin: ['localhost:5000'],
+    methods: ['GET','POST'],
+    credentials: true
+    })
+);
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+    session({
+        key: "userId",
+        secret: "subscribe",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            expires: 60 * 60 * 24,
+        },
+    })
+);
+
 
 
 app.use(express.json());
+
+app.get('/user/Connexion', async (req,res) => {
+    console.log(req+ "ezdf kzqefv ");
+})
 
 app.get('/', (req,res) => {
     res.send("Home");

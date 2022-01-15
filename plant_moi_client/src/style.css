@@ -61,11 +61,13 @@ input[type=text] {
     text-align: center;
     border: none; 
     cursor: pointer;
+    background: none;
 }
 
 .like_and_love:focus {
     border: none;
     outline: none;
+    background: none;
 }
 
 .marker {
