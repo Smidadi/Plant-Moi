@@ -1,9 +1,9 @@
 import React, { Component, useEffect } from 'react';
 import '../style.css';
-import like from "../img/like.png"
-import is_liked from "../img/is_liked.png"
-import love from "../img/love.png"
-import is_loved from "../img/is_loved.png"
+import like from "../img/heart.png"
+import is_liked from "../img/heart_full.png"
+import love from "../img/star.png"
+import is_loved from "../img/star_full.png"
 import SimpleMap from './SimpleMap';
 
 class Api extends Component {
