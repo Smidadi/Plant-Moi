@@ -33,7 +33,7 @@ class Research extends Component {
       for(let i = 0; i<Object.keys(json).length && i<5; ++i)
         tab.push(json[i].canonicalName)
       tab = tab.filter(function(ele , pos){
-        return tab.indexOf(ele) == pos;
+        return tab.indexOf(ele) === pos;
     })
       this.setState({propositions:tab})
     }) 
