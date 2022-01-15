@@ -99,3 +99,7 @@ input[type=text] {
 .deco {
     margin-left: 20px;
 }
+
+body {
+    background-image: url("./img/fond11.jpg");
+}
