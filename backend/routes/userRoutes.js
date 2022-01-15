@@ -35,5 +35,69 @@ router.get('/Connexion/:userName/:password', async (req,res) => {
             .catch(() => res.send({message:"Failed"}))
     
 });
+// person.friends.push(friend);
+// person.save(done);
+
+// PersonModel.update(
+//     { _id: person._id }, 
+//     { $push: { friends: friend } },
+//     done
+// );
+
+router.put('/plantLiked/:user/:plantName', async (req,res) => {
+    await userData.updateOne({
+        userName: req.params.user,
+        $push: {likedPlant: {
+            namePlant: req.params.plantName,
+            note: ''
+        }}
+    }).then(() => res.send("Done"))
+    .catch(() => res.send("Undone"))    
+});
+
+router.put('/addFav/:user/:plantName', async (req,res) => {
+    let favPlant;
+    await userData.findOne({userName: req.params.user})
+                .then(user => {
+                    favPlant = ((user.likedPlant).filter(x => x.namePlant == req.params.plantName))[0];
+                })
+
+    let note;
+    if(typeof(favPlant)=='undefined'){
+        await userData.updateOne({
+            userName: req.params.user,
+            favoritePlant: {
+                namePlant: req.params.plantName,
+                note: ''
+            },
+            $push: {likedPlant: {
+                namePlant: req.params.plantName,
+                note: ''
+            }}
+        }).then(() => res.send("Done"))
+        .catch(() => res.send("Undone"));
+    }else{
+        await userData.updateOne({
+            userName: req.params.user,
+            favoritePlant: {
+                namePlant: req.params.plantName,
+                note: ''
+            }
+        }).then(() => res.send("Done"))
+        .catch(() => res.send("Undone"));
+    }
+});
+
+router.get('/favPlant/:user', async (req,res) => {
+    await userData.findOne({username: req.params.user})
+                .then(user => res.send(user.favoritePlant))
+                .catch(() => res.send("error"));
+});
+
+router.get('/likedPlant/:user', async (req, res) => {
+    await userData.findOne({username: req.params.user})
+                .then(user => res.send(user.likedPlant))
+                .catch(() => res.send("error"));
+});
 
 module.exports = router;

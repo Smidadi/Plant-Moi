@@ -2,6 +2,7 @@ const express = require('express');
 const connectDb = require('./config/db');
 const cors = require('cors');
 const user = require('./routes/userRoutes');
+const plant = require('./routes/plantRoutes');
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -37,15 +38,14 @@ app.use(
 
 app.use(express.json());
 
-app.get('/user/Connexion', async (req,res) => {
-    console.log(req+ "ezdf kzqefv ");
-})
+
 
 app.get('/', (req,res) => {
     res.send("Home");
 })
 
 app.use('/user',user);
+app.use('/plant',plant);
 
 
 
