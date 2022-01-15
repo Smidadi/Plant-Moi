@@ -65,6 +65,10 @@ class Api extends Component {
             fetch("https://api.gbif.org/v1/species/match?name="+ this.props.inputValue)
             .then((res) =>res.json())
             .then((json) => {
+                if(json.matchType === "NONE") {
+                    alert("Cette plante n'existe pas !")
+                    return
+                }
                 this.setState({
                     key:json.usageKey,
                     name:json.canonicalName,
