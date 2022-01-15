@@ -61,15 +61,21 @@ input[type=text] {
     text-align: center;
     border: none; 
     cursor: pointer;
+    background: none;
 }
 
 .like_and_love:focus {
     border: none;
     outline: none;
+    background: none;
 }
 
 #map {
     width: 500px;
     height: 300px;
     border: 1px solid #000;
+}
+
+body {
+    background-image: url("./img/fond11.jpg");
 }
