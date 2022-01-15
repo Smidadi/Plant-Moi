@@ -1,10 +1,10 @@
 import React, { Component, useEffect } from 'react';
-import MapWrapper from '../components/MapWrapper';
 import '../style.css';
 import like from "../img/like.png"
 import is_liked from "../img/is_liked.png"
 import love from "../img/love.png"
 import is_loved from "../img/is_loved.png"
+import SimpleMap from './SimpleMap';
 
 class Api extends Component {
     constructor(props){
@@ -19,35 +19,13 @@ class Api extends Component {
             url:'http://purl.org/dc/terms/identifier',
             like:like,
             love:love,
-            latlng:[]
+            latlng:[0, 0]
         }
     }
 
     componentDidMount = () => {
-        fetch("https://api.gbif.org/v1/species/match?name=Pilea").then((res) => res.json()).then((json) => {
-            let scName = json.scientificName;
-            if(scName === "" || scName === undefined)
-                scName = json.acceptedScientificName
-            this.setState({
-                key:json.usageKey,
-                name:json.canonicalName, 
-                scientificName:scName,               
-                family:json.family
-            }); 
-        })
-
-        fetch("https://api.gbif.org/v1/occurrence/search?taxonKey=2984417").then((res) => res.json()).then((json) => {
-            this.setState({
-                statePlant:json.results[1].stateProvince,
-                img:json.results[11].media[0].identifier,
-                latlng:[json.results[0].decimalLatitude, json.results[0].decimalLongitude]
-            });
-        })
-    }
-
-    componentDidUpdate = () => {
         if(this.state.name != this.props.inputValue){
-            fetch("https://api.gbif.org/v1/species/match?name="+ this.props.inputValue)
+            fetch("https://api.gbif.org/v1/species/match?name=Pilea")
             .then((res) =>res.json())
             .then((json) => {
                 this.setState({
@@ -72,7 +50,51 @@ class Api extends Component {
                     } else {
                         this.setState({
                             statePlant:json.results[i].stateProvince,
-                            img:json.results[i].media[0].identifier
+                            img:json.results[i].media[0].identifier,
+                            latlng:[json.results[i].decimalLatitude, json.results[i].decimalLongitude]
+                        });
+                    }
+
+                })  
+            })
+        }     
+    }
+
+    componentDidUpdate = () => {
+        if(this.state.name != this.props.inputValue){
+            fetch("https://api.gbif.org/v1/species/match?name="+ this.props.inputValue)
+            .then((res) =>res.json())
+            .then((json) => {
+                if(json.matchType === "NONE") {
+                    alert("Cette plante n'existe pas !")
+                    return
+                }
+                this.setState({
+                    key:json.usageKey,
+                    name:json.canonicalName,
+                    scientificName:json.scientificName,   
+                    family:json.family
+                });
+                fetch("https://api.gbif.org/v1/occurrence/search?taxonKey=" + this.state.key)
+                .then((res) => res.json())
+                .then((json) => {
+                    let resultsLen = Object.keys(json.results).length
+                    let i = 0
+                    try {
+                        while(Object.keys(json.results[i].media).length === 0 && i <= resultsLen){
+                            i++
+                        }
+                    } catch(error) {}
+                    if(i === resultsLen) { //Aucune image dispo
+                        this.setState({
+                            statePlant:json.results[0].stateProvince,
+                            img:undefined
+                        });    
+                    } else {
+                        this.setState({
+                            statePlant:json.results[i].stateProvince,
+                            img:json.results[i].media[0].identifier,
+                            latlng:[json.results[i].decimalLatitude, json.results[i].decimalLongitude]
                         });
                     }
 
@@ -113,11 +135,11 @@ class Api extends Component {
             </div>
             
             <div className="plantInfo col-6"> 
-                <div className="row"> {this.state.img === undefined ? <p>RIEN</p> :<img src={this.state.img} width="50%" height="50%"/>} </div>
+                <div className="row"> {this.state.img === undefined ? <div className="noImage"><span>Pas d'image pour cette plante</span></div> :<img src={this.state.img} width="50%" height="50%"/>} </div>
             </div>
             <div className="plantInfo col-6"> 
                 <div className="row">
-                <MapWrapper LatLong={this.state.latlng}/>
+                <SimpleMap LatLong={{lat: this.state.latlng[0],lng: this.state.latlng[1]}} zoom={3}/>
                 </div>
             </div>
             </>

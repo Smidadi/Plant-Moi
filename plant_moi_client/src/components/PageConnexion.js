@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Link, Navigate } from "react-router-dom";
+import {ReactSession} from 'react-client-session';
 import '../style.css';
 import Field from './Field';
 import Logo from './Logo';
+
+
+import UserProfile from '../UserProfile';
 
 class PageConnexion extends Component {
     constructor(props){
@@ -55,7 +59,10 @@ class PageConnexion extends Component {
 
     render() {
         if(this.state.connected){
-            return  <Navigate push to="/Profil" />;
+            ReactSession.setStoreType("localStorage");
+            ReactSession.set("username", this.state.username);
+            ReactSession.set("connected", true);
+            return <Navigate push to="/Profil" />;
         }
         return (
             <div className="container-fluid">
@@ -66,7 +73,7 @@ class PageConnexion extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='container'>
+                <div className='container formulaire'>
                     <form onSubmit={this.handleSubmit}>
                         <Field submit={this.state.submit} type='username' userInfo={this.state.username} updateUserInfo={this.updateUserInfo}/>
                         <br />
