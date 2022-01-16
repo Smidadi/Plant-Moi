@@ -106,8 +106,7 @@ input[type=text] {
     margin-top: 100px;
 }
 
-.deco {
-    margin-left: 10px;
+.btnclick {
     border: none;
     background-color: transparent;
     cursor: pointer;

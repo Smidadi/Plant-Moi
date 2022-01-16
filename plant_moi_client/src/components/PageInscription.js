@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import '../style.css';
-import Logo from '../img/logo.png';
+import Logo from '../components/Logo';
 import Field from './Field';
 
 class PageInscription extends Component {
@@ -82,7 +82,7 @@ class PageInscription extends Component {
                 <div className="row bar"> 
                     <div className="container">
                         <div className="row research">
-                        <img src={Logo} width="40px" height="40px"/> <p className="resizeTextLogo"> Plant&Moi </p>
+                        <Logo></Logo>
                         </div>
                     </div>
                 </div>

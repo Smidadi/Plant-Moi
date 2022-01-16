@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import {ReactSession} from 'react-client-session';
 import '../style.css';
 import Field from './Field';
-import Logo from '../img/logo.png';
+import Logo from '../components/Logo'
 
 
 import UserProfile from '../UserProfile';
@@ -68,7 +68,7 @@ class PageConnexion extends Component {
                 <div className="row bar"> 
                     <div className="container">
                         <div className="row research">
-                                <img src={Logo} width="40px" height="40px"/> <p className="resizeTextLogo"> Plant&Moi </p>
+                                <Logo></Logo>
                         </div>
                     </div>
                 </div>
