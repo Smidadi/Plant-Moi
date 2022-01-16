@@ -6,7 +6,6 @@ const AnyReactComponent = () => <div className="marker"></div>;
 
 class SimpleMap extends Component {
   render() {
-    console.log(this.props)
     return (
       <div style={{ height: '50vh', width: '100%' }}>
         <GoogleMapReact

@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { ReactSession } from 'react-client-session';
 import connexionImg from '../img/connexion.png';
 import deco from '../img/se-deconnecter.png'
 
-import UserProfile from '../UserProfile';
-import Logo from './Logo';
-
 class Authentification extends Component { 
-
+  
+  deco = () => {
+    alert("Vous êtes déconnecté")
+    localStorage.setItem("connected", "false")
+    localStorage.setItem("username", "")
+    window.location.href = "/"
+  }
   render() {
     return (
-        <div className="col-3 connexion"> 
-          <Link to={(ReactSession.get("connected") != true?"/Connexion":"/Profil")}>
+        <div className="col-3 connexion">
+        {console.log(localStorage.getItem("connected") === "true")}
+          <Link to={(localStorage.getItem("connected") === "true") ? "/Profil" : "/Connexion"}>
             <img src={connexionImg} alt="Logo de connexion" width="90px" height="90px"/>
           </Link>
-          <img src={deco} className="deco" width="50px"></img>
+          {localStorage.getItem("connected") === "true" ? <button className="deco" onClick={this.deco}><img src={deco} className="deco" width="50px"></img></button> : <div></div>}
+          
         </div>
         
     )

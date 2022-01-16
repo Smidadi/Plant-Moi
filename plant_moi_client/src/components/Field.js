@@ -28,7 +28,7 @@ class Field extends Component {
                 type = 'password';
                 break;
             default :
-                text = 'email';
+                text = 'Email';
                 type = 'email   ';
                 break;
         }

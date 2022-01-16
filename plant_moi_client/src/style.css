@@ -1,10 +1,5 @@
 .bar {
-    /*background: linear-gradient(to right, rgb(23, 107, 23), rgb(123, 155, 65));*/
-    /*background: linear-gradient(blue, 10%, pink);*/
     background: linear-gradient(60deg, rgb(23, 107, 23), rgb(123, 155, 65));
-
-    /*padding-top: 15px;
-    padding-bottom: 15px;*/
 }
 
 .research {
@@ -49,6 +44,22 @@ input[type=text] {
 
 .plantInfo {
     padding:2%;
+}
+
+.marge_left {
+    padding-left:10%;
+}
+
+.marge_left2 {
+    padding-left:11%;
+}
+
+.marge_right {
+    padding-right:10%;
+}
+
+#resizeImg {
+    height: 50vh;
 }
 
 .structInfo {
@@ -96,33 +107,31 @@ input[type=text] {
 }
 
 .deco {
-    margin-left: 20px;
+    margin-left: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 body {
     background-image: url("./img/fond11.jpg");
 }
 
-.textColor {
+.textColor, .textColorLink {
     color:green;
 }
 
-.textColor:link {
-    color:green;
-    text-decoration: underline green;
-}
-
-.textColor:hover {
+.textColorLink:link, .textColor:link {
     color:green;
     text-decoration: underline green;
 }
 
-.textColor:active {
+.textColorLink:hover {
     color:green;
     text-decoration: underline green;
 }
 
-a
-{
-text-decoration: none;
+.resizeTextLogo {
+    padding-top:1%;
+    padding-left: 1%;
 }

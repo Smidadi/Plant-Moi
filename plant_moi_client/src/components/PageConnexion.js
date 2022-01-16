@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import {ReactSession} from 'react-client-session';
 import '../style.css';
 import Field from './Field';
-import Logo from './Logo';
+import Logo from '../img/logo.png';
 
 
 import UserProfile from '../UserProfile';
@@ -59,9 +59,8 @@ class PageConnexion extends Component {
 
     render() {
         if(this.state.connected){
-            ReactSession.setStoreType("localStorage");
-            ReactSession.set("username", this.state.username);
-            ReactSession.set("connected", true);
+            localStorage.setItem("connected", "true")
+            localStorage.setItem("username", this.state.username)
             return <Navigate push to="/Profil" />;
         }
         return (
@@ -69,7 +68,7 @@ class PageConnexion extends Component {
                 <div className="row bar"> 
                     <div className="container">
                         <div className="row research">
-                            <Logo />
+                                <img src={Logo} width="40px" height="40px"/> <p className="resizeTextLogo"> Plant&Moi </p>
                         </div>
                     </div>
                 </div>
@@ -82,7 +81,7 @@ class PageConnexion extends Component {
                         <button type="submit" onClick={() => this.setState({submit: true})} className="form-control btn btn-success">Submit</button>
                         <div className="dropdown-divider"></div>
                         <Link to="/Inscription">
-                            <p className="textColor">Nouveau ? Inscrit toi !</p>
+                            <p className="textColorLink">Nouveau ? Inscrit toi !</p>
                         </Link>
                     </form>
                 </div>
