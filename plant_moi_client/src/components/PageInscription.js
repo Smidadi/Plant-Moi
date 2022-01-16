@@ -86,7 +86,7 @@ class PageInscription extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='container formulaire'>
+                <div className="container formulaire textColor">
                     <form onSubmit={this.handleSubmit}>
                         <Field submit={this.state.submit} type='username' userInfo={this.state.username} updateUserInfo={this.updateUserInfo}/>
                         <br />
@@ -96,11 +96,11 @@ class PageInscription extends Component {
                         <br />
                         <Field submit={this.state.submit} type='passwordConfirm' userInfo={this.state.CPassword} updateUserInfo={this.updateUserInfo}/>
                         <br />
-                        <button type="submit" className="form-control btn btn-primary">Submit</button>
+                        <button type="submit" className="form-control btn btn-success">Submit</button>
                         <div className="dropdown-divider"></div>
                     </form>
                     <Link to="/Connexion">
-                        <p>Déjà inscrit ? Connectes toi !</p>
+                        <p className="textColor">Déjà inscrit ? Connectes toi !</p>
                     </Link>
                 </div>
             </div>

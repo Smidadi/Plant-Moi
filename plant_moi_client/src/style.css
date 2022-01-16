@@ -51,6 +51,22 @@ input[type=text] {
     padding:2%;
 }
 
+.marge_left {
+    padding-left:10%;
+}
+
+.marge_left2 {
+    padding-left:11%;
+}
+
+.marge_right {
+    padding-right:10%;
+}
+
+#resizeImg {
+    height: 50vh;
+}
+
 .structInfo {
     font-weight:bold;
 }
@@ -120,9 +136,4 @@ body {
 .textColor:active {
     color:green;
     text-decoration: underline green;
-}
-
-a
-{
-text-decoration: none;
 }
