@@ -7,7 +7,7 @@ const PlantForList = new mongoose.Schema({
 
 
 const userSchema = new mongoose.Schema({
-    userName: { type: String },
+    userName: { type: String, unique: true },
     email: { type: String },
     password: { type: String },
     favoritePlant: { type: PlantForList },
