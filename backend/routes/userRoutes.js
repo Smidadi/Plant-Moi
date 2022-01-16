@@ -35,6 +35,7 @@ router.get('/Connexion/:userName/:password', async (req,res) => {
             .catch(() => res.send({message:"Failed"}))
     
 });
+
 // person.friends.push(friend);
 // person.save(done);
 
@@ -55,7 +56,7 @@ router.put('/plantLiked/:user/:plantName', async (req,res) => {
     .catch(() => res.send("Undone"))    
 });
 
-router.put('/addFav/:user/:plantName', async (req,res) => {
+router.put('/favPlant/:user/:plantName', async (req,res) => {
     let favPlant;
     await userData.findOne({userName: req.params.user})
                 .then(user => {
@@ -99,5 +100,23 @@ router.get('/likedPlant/:user', async (req, res) => {
                 .then(user => res.send(user.likedPlant))
                 .catch(() => res.send("error"));
 });
+
+router.delete('/LikedPlant/:user/:plantName', async (req, res) => {
+    await userData.updateOne({
+        userName: req.params.user,
+        $pull: {likedPlant: {namePlant: req.params.plantName}}
+    })
+    .then(() => res.send('Done'))
+    .catch(() => res.send('Undone'));
+});
+
+router.delete('/favPlant/:user', async (req,res) => {
+    await userData.updateOne({
+        userName: req.params.user,
+        $unset: {favoritePlant: ""}
+    })
+    .then(() => res.send('Done'))
+    .catch(() => res.send('Undone'));
+})
 
 module.exports = router;
