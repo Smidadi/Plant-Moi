@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import '../style.css';
 import Research from './Research';
 import Authentification from './Authentification';
-import {ReactSession} from 'react-client-session';
-import Api from './Api';
-
-import UserProfile from '../UserProfile';
 
 
 class PageProfil extends Component {
@@ -26,7 +22,7 @@ class PageProfil extends Component {
                     <div className="row">
                         <Research inputValue={this.state.inputValue} searchBarValue={this.searchBarValue}/>
                         <Authentification />
-                        <p>User Name is: {ReactSession.get("username")}</p>
+                        <p>User Name is: {localStorage.getItem("username")}</p>
                     </div>
                 </div>  
             </div>

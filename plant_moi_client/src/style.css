@@ -107,7 +107,10 @@ input[type=text] {
 }
 
 .deco {
-    margin-left: 20px;
+    margin-left: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 body {

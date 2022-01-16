@@ -59,9 +59,8 @@ class PageConnexion extends Component {
 
     render() {
         if(this.state.connected){
-            ReactSession.setStoreType("localStorage");
-            ReactSession.set("username", this.state.username);
-            ReactSession.set("connected", true);
+            localStorage.setItem("connected", "true")
+            localStorage.setItem("username", this.state.username)
             return <Navigate push to="/Profil" />;
         }
         return (
