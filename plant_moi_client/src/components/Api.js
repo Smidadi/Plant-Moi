@@ -124,56 +124,62 @@ class Api extends Component {
     }
 
     changeLike = () => { 
-        if(this.state.like == like & localStorage.getItem('connected') == 'true'){
-            fetch('http://localhost:5000/user/likedPlant/'+localStorage.getItem('username')+'/'+this.state.name,{
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => {
-                response.text().then(text => {
-                    if(text == 'Done')
-                        this.setState({like: is_liked})
-                })
-                
-                
-            })
-        }else{
-            fetch('http://localhost:5000/user/likedPlant/'+localStorage.getItem('username')+'/'+this.state.name,{
-                method: 'DELETE',
-                headers: {'Content-Type': 'application/json'}
-            })
-            .then(response => {
-                response.text().then(text => {
-                    if(text == 'Done')
-                        this.setState({like: like});
-                });
-            });
-        }
-    }
+        if(localStorage.getItem('connected') == 'true'){
 
-    changeLove = () => { 
-        if(this.state.love == love & localStorage.getItem('connected') == 'true'){
-                fetch('http://localhost:5000/user/favPlant/'+localStorage.getItem('username')+'/'+this.state.name,{
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json'}
-            })
-            .then(response => {
-                response.text().then(text => {
-                    if(text == 'Done')
-                        this.setState({love: is_loved})
+            if(this.state.like == like){
+                fetch('http://localhost:5000/user/likedPlant/'+localStorage.getItem('username')+'/'+this.state.name,{
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' }
                 })
-            })
-        }else{
-            fetch('http://localhost:5000/user/favPlant/'+localStorage.getItem('username'),{
+                .then(response => {
+                    response.text().then(text => {
+                        if(text == 'Done')
+                        this.setState({like: is_liked})
+                    })
+                    
+                    
+                })
+            }else{
+                fetch('http://localhost:5000/user/likedPlant/'+localStorage.getItem('username')+'/'+this.state.name,{
                     method: 'DELETE',
                     headers: {'Content-Type': 'application/json'}
                 })
                 .then(response => {
                     response.text().then(text => {
                         if(text == 'Done')
-                            this.setState({love: love})
+                        this.setState({like: like});
+                    });
+                });
+            }
+        }
+    }
+
+    changeLove = () => { 
+        if(localStorage.getItem('connected') == 'true'){
+
+            if(this.state.love == love){
+                fetch('http://localhost:5000/user/favPlant/'+localStorage.getItem('username')+'/'+this.state.name,{
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'}
+                })
+                .then(response => {
+                    response.text().then(text => {
+                        if(text == 'Done')
+                        this.setState({love: is_loved})
                     })
                 })
+            }else{
+                fetch('http://localhost:5000/user/favPlant/'+localStorage.getItem('username'),{
+                    method: 'DELETE',
+                    headers: {'Content-Type': 'application/json'}
+                })
+                .then(response => {
+                    response.text().then(text => {
+                        if(text == 'Done')
+                        this.setState({love: love})
+                    })
+                })
+            }
         }
         
     }
