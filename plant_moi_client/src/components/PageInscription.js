@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import '../style.css';
-import Logo from './Logo';
+import Logo from '../img/logo.png';
 import Field from './Field';
 
 class PageInscription extends Component {
@@ -82,7 +82,7 @@ class PageInscription extends Component {
                 <div className="row bar"> 
                     <div className="container">
                         <div className="row research">
-                            <Logo />
+                        <img src={Logo} width="40px" height="40px"/> <p className="resizeTextLogo"> Plant&Moi </p>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@ class PageInscription extends Component {
                         <div className="dropdown-divider"></div>
                     </form>
                     <Link to="/Connexion">
-                        <p className="textColor">Déjà inscrit ? Connectes toi !</p>
+                        <p className="textColorLink">Déjà inscrit ? Connectes toi !</p>
                     </Link>
                 </div>
             </div>

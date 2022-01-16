@@ -1,10 +1,5 @@
 .bar {
-    /*background: linear-gradient(to right, rgb(23, 107, 23), rgb(123, 155, 65));*/
-    /*background: linear-gradient(blue, 10%, pink);*/
     background: linear-gradient(60deg, rgb(23, 107, 23), rgb(123, 155, 65));
-
-    /*padding-top: 15px;
-    padding-bottom: 15px;*/
 }
 
 .research {
@@ -119,21 +114,21 @@ body {
     background-image: url("./img/fond11.jpg");
 }
 
-.textColor {
+.textColor, .textColorLink {
     color:green;
 }
 
-.textColor:link {
+.textColorLink:link, .textColor:link {
     color:green;
     text-decoration: underline green;
 }
 
-.textColor:hover {
+.textColorLink:hover {
     color:green;
     text-decoration: underline green;
 }
 
-.textColor:active {
-    color:green;
-    text-decoration: underline green;
+.resizeTextLogo {
+    padding-top:1%;
+    padding-left: 1%;
 }
