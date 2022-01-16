@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import connexionImg from '../img/connexion.png';
+import connexionImg from '../img/user.png';
 import deco from '../img/se-deconnecter.png'
 
 class Authentification extends Component { 
@@ -14,11 +14,10 @@ class Authentification extends Component {
   render() {
     return (
         <div className="col-3 connexion">
-        {console.log(localStorage.getItem("connected") === "true")}
           <Link to={(localStorage.getItem("connected") === "true") ? "/Profil" : "/Connexion"}>
-            <img src={connexionImg} alt="Logo de connexion" width="90px" height="90px"/>
+            <img src={connexionImg} alt="Logo de connexion" className="user" width="40px" height="40px"/>
           </Link>
-          {localStorage.getItem("connected") === "true" ? <button className="btnclick" onClick={this.deco}><img src={deco} width="50px"></img></button> : <div></div>}
+          {localStorage.getItem("connected") === "true" ? <button className="btnclick user" onClick={this.deco}><img src={deco} width="50px"></img></button> : <div></div>}
           
         </div>
         
