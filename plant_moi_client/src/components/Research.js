@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Logo from './Logo';
+import research from '../img/rechercher.png'
 
 class Research extends Component {
 
@@ -25,6 +26,12 @@ class Research extends Component {
     this.suggests()
   }
 
+  rechercher = () => {
+    let res = this.state.inputValue.toLowerCase();
+    res = res.charAt(0).toUpperCase() + res.slice(1);
+    this.props.searchBarValue(res);
+  }
+
   suggests = () => {
     fetch("https://api.gbif.org/v1/species/suggest?q=%22" + this.state.inputValue + "%22")
     .then((res) => res.json())
@@ -47,6 +54,7 @@ class Research extends Component {
             <datalist id="propositions">
               {this.state.propositions.map((element, i) => <option value={element}></option>)}
             </datalist>
+            <button className="btnclick" onClick={this.rechercher}><img src={research} alt="rechercher" width="40px" height="40px"/></button>
         </div>
     )
   }  
