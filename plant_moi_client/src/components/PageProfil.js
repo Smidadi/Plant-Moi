@@ -40,7 +40,7 @@ class PageProfil extends Component {
                 </div>  
             </div>
             <div className="row">
-              <div className="col-2 listOfPlants">
+              <div className="col-2 listOfPlants" id="style-15">
                 <ListePlante getDisplay={this.getDisplay}/>
               </div>
               <div className="col-10">

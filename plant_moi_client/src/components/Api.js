@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import '../style.css';
 import like from "../img/heart.png"
 import is_liked from "../img/heart_full.png"
