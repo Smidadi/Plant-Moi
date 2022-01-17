@@ -22,10 +22,6 @@ class PageProfil extends Component {
     this.setState({toDisplay:val})
   }
 
-  handleChange = (event) => {
-    this.setState({text:event.target.value})
-    this.sendToBDD()
-  }
 
   sendToBDD = () => {
     fetch("http://localhost:5000/user/note/" + localStorage.getItem("username") + "/" + this.state.toDisplay , {
@@ -35,19 +31,23 @@ class PageProfil extends Component {
         note:this.state.text
         })
     })
+    .then(response => {
+      console.log("res", response)
+      response.text().then(text => {
+        console.log("ici", text)
+      })
+  })
+    //console.log("send", this.state.text)
   }
 
   getNoteFromBDD = () => {
     fetch("http://localhost:5000/user/note/" + localStorage.getItem("username") + "/" + this.state.toDisplay)
-    .then((res) => {console.log(res);res.json()})
-    .then((json) => {
-      console.log("json", json)
-    });
-  }
-
-  componentDidUpdate = () => {
-    if(this.state.toDisplay !== '')
-      this.getNoteFromBDD()
+    .then(response => {
+      console.log(response)
+      response.text().then(text => {
+        this.setState({text:text})
+      })
+  })
   }
 
   render() {
@@ -77,9 +77,10 @@ class PageProfil extends Component {
                 </div>
               </div>
             </div>
-            {this.state.toDisplay !== '' ?
+            {false/*this.state.toDisplay !== ''*/ ?
             <div className="row">
-                <textarea onChange={this.handleChange} className="form-control z-depth-1 textarea" id="exampleFormControlTextarea6" rows="10" placeholder="Petite note pour cette plante"></textarea>
+                <textarea className="form-control z-depth-1 textarea" id="exampleFormControlTextarea6" rows="10" placeholder="Petite note pour cette plante"></textarea>
+                <button className="submit" onClick={this.sendToBDD}>SUBMIT</button>
             </div>
             : <div className="row"></div>}
         </div>

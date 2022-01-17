@@ -218,3 +218,10 @@ body {
     margin: 5%;
     border: 3px solid green;
 }
+
+.submit {
+    border: none;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+}

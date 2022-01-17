@@ -372,7 +372,7 @@ router.get('/note/:user/:plantName', async (req,res) => {
 
 router.put('/note/:user/:plantName', async (req,res) => {
     await userData.updateOne(
-        {userName: req.params.user, likedPlant: plantName},
+        {userName: req.params.user, likedPlant: {namePlant:req.params.plantName}},
         {$set: { "note.$": req.body.text}}
     ).then(() => res.send("Done"))
     .catch(() => res.send('Undone'))
