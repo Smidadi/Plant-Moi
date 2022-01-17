@@ -9,11 +9,30 @@ const bcrypt  = require('bcrypt');
  * /Inscription:
  *      post:
  *          description: Add a user in the database
+ *          parameters:
+ *                  - in: body
+ *                    name: userName
+ *                    schema: 
+ *                      type: string 
+ *                    required: true
+ *                    description: the username      
+ *                  - in: body
+ *                    name: password
+ *                    schema:
+ *                      type: string
+ *                    required: true
+ *                    description: the password
+ *                  - in: body
+ *                    name: email
+ *                    schema: 
+ *                      type: string 
+ *                    required: true
+ *                    description: the email        
  *          responses: 
  *                  'Added':
  *                      description: the user is ccorrectly added to the database
  *                  'Failed':
- *                      description: a problem occurs       
+ *                      description: a problem has occured       
  */
 router.post('/Inscription', async (req,res) => {
     await userData.find()
@@ -47,8 +66,18 @@ router.post('/Inscription', async (req,res) => {
  *      get:
  *          description: Verify if a user in in the database
  *          parameters:
- *              username: the username
- *              password: the password
+ *                  - in: path
+ *                    name: user
+ *                    schema: 
+ *                      type: string 
+ *                    required: true
+ *                    description: the username      
+ *                  - in: path
+ *                    name: password
+ *                    schema:
+ *                      type: string
+ *                    required: true
+ *                    description: the password
  *          responses: 
  *                  'In':
  *                      description: the user is in the database
@@ -84,8 +113,18 @@ router.get('/Connexion/:userName/:password', async (req,res) => {
  *      put:
  *          description: Add liked plant for a specific user
  *          parameters:
- *                  user: the username
- *                  plantName: the name of the plant
+ *                  - in: path
+ *                    name: user
+ *                    schema: 
+ *                      type: string 
+ *                    required: true
+ *                    description: the username      
+ *                  - in: path
+ *                    name: plantName
+ *                    schema:
+ *                      type: string
+ *                    required: true
+ *                    description: the plant name      
  *          responses: 
  *                  'Done':
  *                      description: The plant is added on the liked plant list of the user 
@@ -102,9 +141,33 @@ router.put('/likedPlant/:user/:plantName', async (req,res) => {
     .catch((x) => res.send("Undone"))
 });
 
+
+/**
+ * @openapi
+ * /user/favPlant/{user}:/{plantName}:
+ *      put:
+ *          description: Change the favorite
+ *          parameters:
+ *                  - in: path
+ *                    name: user
+ *                    schema: 
+ *                      type: string 
+ *                    required: true
+ *                    description: the username      
+ *                  - in: path
+ *                    name: plantName
+ *                    schema:
+ *                      type: string
+ *                    required: true
+ *                    description: the plant name   
+ *          responses: 
+ *                  'Done':
+ *                      description: The plant is the favorite favorite
+ *                  'Undone':
+ *                      description: The plant is not the favorite ! a problem has occured      
+ */
 router.put('/favPlant/:user/:plantName', async (req,res) => {
     let favPlant;
-    console.log(req.params);
     await userData.findOne({userName: req.params.user})
                 .then(user => {
                     favPlant = ((user.likedPlant).filter(x => x.namePlant == req.params.plantName))[0];
@@ -137,6 +200,24 @@ router.put('/favPlant/:user/:plantName', async (req,res) => {
     }
 });
 
+/**
+ * @openapi
+ * /user/favPlant/{user}:
+ *      get:
+ *          description: get the favorite plant of a user
+ *          parameters:
+ *                  - in: path
+ *                    name: user
+ *                    schema: 
+ *                      type: string 
+ *                    required: true
+ *                    description: the username         
+ *          responses: 
+ *                  'user.favoritePlant':
+ *                      description: The favorite plant of user
+ *                  'error':
+ *                      description: a problem has occured   
+ */
 router.get('/favPlant/:user', async (req,res) => {
 
     await userData.findOne({userName: req.params.user})
@@ -144,12 +225,55 @@ router.get('/favPlant/:user', async (req,res) => {
                 .catch(() => res.send("error"));
 });
 
+
+/**
+ * @openapi
+ * /user/likedPlant/{user}:
+ *      get:
+ *          description: get all the liked plant of user
+ *          parameters:
+ *                  - in: path
+ *                    name: user
+ *                    schema: 
+ *                      type: string 
+ *                    required: true
+ *                    description: the username 
+ *          responses: 
+ *                  'user.likedPlant':
+ *                      description: An array of all the liked plant
+ *                  'error':
+ *                      description: a problem has occured   
+ */
 router.get('/likedPlant/:user', async (req, res) => {
     await userData.findOne({userName: req.params.user})
                 .then(user => res.send(user.likedPlant))
                 .catch(() => res.send("error"));
 });
 
+/**
+ * @openapi
+ * /user/likedPlant/{user}:/{plantName}:
+ *      get:
+ *          description: get if a plant is liked by user
+ *          parameters:
+ *                  - in: path
+ *                    name: user
+ *                    schema: 
+ *                      type: string 
+ *                    required: true
+ *                    description: the username      
+ *                  - in: path
+ *                    name: plantName
+ *                    schema:
+ *                      type: string
+ *                    required: true
+ *                    description: the plant name   
+ *          responses: 
+ *                  'Liked':
+ *                      description: The plant is liked
+ *                  'NLike':
+ *                      description: the plant isn't liked
+ */
 router.get('/likedPlant/:user/:plantName', async (req,res) => {
     await userData.findOne({userName: req.params.user})
                     .then(user => {
@@ -161,6 +285,30 @@ router.get('/likedPlant/:user/:plantName', async (req,res) => {
                     })
 });
 
+/**
+ * @openapi
+ * /user/likedPlant/{user}:/{plantName}:
+ *      delete:
+ *          description: remove a liked plant
+ *          parameters:
+ *                  - in: path
+ *                    name: user
+ *                    schema: 
+ *                      type: string 
+ *                    required: true
+ *                    description: the username      
+ *                  - in: path
+ *                    name: plantName
+ *                    schema:
+ *                      type: string
+ *                    required: true
+ *                    description: the plant name   
+ *          responses: 
+ *                  'Done':
+ *                      description: operation is a success
+ *                  'Undone':
+ *                      description: a problem has occured   
+ */
 router.delete('/LikedPlant/:user/:plantName', async (req, res) => {
     await userData.updateOne(
         {userName: req.params.user},
@@ -170,6 +318,24 @@ router.delete('/LikedPlant/:user/:plantName', async (req, res) => {
     .catch(() => res.send('Undone'));
 });
 
+/**
+ * @openapi
+ * /user/favPlant/{user}:
+ *      delete:
+ *          description: remove the favorite plant
+ *          parameters:
+ *                  - in: path
+ *                    name: user
+ *                    schema: 
+ *                      type: string 
+ *                    required: true
+ *                    description: the username       
+ *          responses: 
+ *                  'Done':
+ *                      description: operation is a success
+ *                  'Undone':
+ *                      description: a problem has occured   
+ */
 router.delete('/favPlant/:user', async (req,res) => {
     await userData.updateOne({
         userName: req.params.user},
