@@ -33,12 +33,15 @@ input[type=text] {
  }*/
 
 .connexion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-left: 2px solid;
     border-color: white;
     
     margin-top: 2%;
     margin-bottom: 2%;
-    padding-left:5%;
+    
 
 }
 
@@ -146,4 +149,12 @@ body {
 .listOfPlants {
     border-right: 2px solid green;
     border-bottom: 2px solid green;
+}
+
+.user {
+    margin-right: 10px;
+}
+
+.rechercher {
+    margin-left: 40%;
 }
