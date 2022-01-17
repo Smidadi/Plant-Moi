@@ -18,12 +18,13 @@ class Api extends Component {
             img:'',
             like:like,
             love:love,
-            latlng:[0, 0]
+            latlng:[0, 0],
+            notFirstTime:false
         }
     }
 
     componentDidMount = () => {
-        if(this.state.name !== this.props.inputValue){
+        if(this.state.name !== this.props.inputValue && this.state.notFirstTime===false){
             fetch("https://api.gbif.org/v1/species/match?name=Pilea")
             .then((res) =>res.json())
             .then((json) => {
@@ -56,6 +57,7 @@ class Api extends Component {
 
                 })  
             })
+            this.setState({notFirstTime:true})
         }     
     }
 
