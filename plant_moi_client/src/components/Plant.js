@@ -17,7 +17,7 @@ class Plant extends Component {
     return (
         <>
             {this.props.fav == true ? 
-            <div className="row favPlant">
+            <div className="row plant fav">
                 <div className="col-9 replaceText">
                     {this.props.plantName} 
                 </div>
@@ -26,7 +26,7 @@ class Plant extends Component {
                 </div>
             </div> 
             : 
-            <div className="row likedPlants">
+            <div className="row plant liked">
                 <div className="col-9 replaceText">
                     {this.props.plantName} 
                 </div>

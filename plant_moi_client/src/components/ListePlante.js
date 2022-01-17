@@ -31,7 +31,8 @@ class ListePlante extends Component {
   render() {
     return (
         <>
-            <Plant plantName={this.state.plantName} fav={true}/>
+        {this.state.plantName !== "" ? <Plant plantName={this.state.plantName} fav={true}/> : <div></div>}
+            
             {
               this.state.likedPlant.map((element) => (
                 <Plant plantName={element.namePlant}/>
