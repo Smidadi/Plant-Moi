@@ -4,6 +4,9 @@ const cors = require('cors');
 const user = require('./routes/userRoutes');
 const plant = require('./routes/plantRoutes');
 
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -17,17 +20,26 @@ app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(
-    session({
-        key: "userId",
-        secret: "subscribe",
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            expires: 60 * 60 * 24,
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Contact REST API',
+            description: "A REST API built with Express and MongoDB.",
+            version: '0.1',
         },
-    })
-);
+        servers: [
+            {
+                url: 'http://localhost:5000/api',
+                description: 'Development server',
+            },
+        ],
+    },
+    apis: ["./routes/*.js"],
+}
+
+const openapiSpecification = swaggerJsDoc(options);
+
 
 
 
@@ -39,6 +51,7 @@ app.get('/', (req,res) => {
     res.send("Home");
 })
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.use('/user',user);
 app.use('/plant',plant);
 

@@ -2,7 +2,19 @@ const router = require('express').Router();
 const userControl = require('../src/userConroller');
 const userData = require('../models/userModels');
 
-router.post('/Inscription', async (req,res) => {
+
+/**
+ * @openapi
+ * /Inscription:
+ *      post:
+ *          description: Add a user in the database
+ *          responses: 
+ *                  'Added':
+ *                      description: the user is ccorrectly added to the database
+ *                  'Failed':
+ *                      description: a problem occurs       
+ */
+router.post('/User/Inscription', async (req,res) => {
     await userData.find()
             .then((users) => {
                 if((users.filter( (x) => x.userName == req.body.userName)).length === 0 & userControl.verifyInformation(req.body)){
@@ -22,7 +34,20 @@ router.post('/Inscription', async (req,res) => {
             .catch(() => res.send({message:"Failed"}))
 });
 
-
+/**
+ * @openapi
+ * /user/Connexion/{username}:/{password}:
+ *      get:
+ *          description: Verify if a user in in the database
+ *          parameters:
+ *              username: the username
+ *              password: the password
+ *          responses: 
+ *                  'In':
+ *                      description: the user is in the database
+ *                  'Not in':
+ *                      description: a The user is not in the database       
+ */
 router.get('/Connexion/:userName/:password', async (req,res) => {
     await userData.find()
             .then((users) => {
@@ -45,6 +70,20 @@ router.get('/Connexion/:userName/:password', async (req,res) => {
 //     done
 // );
 
+/**
+ * @openapi
+ * /user/likedPlant/{user}:/{plantName}:
+ *      put:
+ *          description: Add liked plant for a specific user
+ *          parameters:
+ *                  user: the username
+ *                  plantName: the name of the plant
+ *          responses: 
+ *                  'Done':
+ *                      description: The plant is added on the liked plant list of the user 
+ *                  'Undone':
+ *                      description: The plant hasn't been had in the database       
+ */
 router.put('/likedPlant/:user/:plantName', async (req,res) => {
     await userData.updateOne({
         userName: req.params.user,
