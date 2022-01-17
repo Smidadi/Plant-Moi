@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import '../style.css';
 import like from "../img/heart.png"
 import is_liked from "../img/heart_full.png"
@@ -16,15 +16,15 @@ class Api extends Component {
             family:'',
             statePlant:'',
             img:'',
-            url:'http://purl.org/dc/terms/identifier',
             like:like,
             love:love,
-            latlng:[0, 0]
+            latlng:[0, 0],
+            notFirstTime:false
         }
     }
 
     componentDidMount = () => {
-        if(this.state.name != this.props.inputValue){
+        if(this.state.name !== this.props.inputValue && this.state.notFirstTime===false){
             fetch("https://api.gbif.org/v1/species/match?name=Pilea")
             .then((res) =>res.json())
             .then((json) => {
@@ -57,11 +57,12 @@ class Api extends Component {
 
                 })  
             })
+            this.setState({notFirstTime:true})
         }     
     }
 
     componentDidUpdate = () => {
-        if(this.state.name != this.props.inputValue){
+        if(this.state.name !== this.props.inputValue){
             fetch("https://api.gbif.org/v1/species/match?name="+ this.props.inputValue)
             .then((res) =>res.json())
             .then((json) => {
@@ -73,7 +74,7 @@ class Api extends Component {
                 fetch("http://localhost:5000/user/likedPlant/"+localStorage.getItem('username')+'/'+json.canonicalName)
                 .then(response => {
                     response.text().then(text => {
-                        if(text == 'Liked')
+                        if(text === 'Liked')
                             this.setState({like: is_liked});
                         else
                             this.setState({like: like});

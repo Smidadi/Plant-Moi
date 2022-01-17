@@ -7,15 +7,19 @@ class Plant extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
-      plantName: '',
-      fav:''
-    }
+    this.state = {
+      text:''
+  }
+  }
+
+  sendPlant = () => {
+    this.props.getDisplay(this.props.plantName)
   }
 
   render() {
     return (
         <>
+        <div onClick={this.sendPlant}>
             {this.props.fav == true ? 
             <div className="row plant fav">
                 <div className="col-9 replaceText">
@@ -34,6 +38,7 @@ class Plant extends Component {
                     <img src={is_liked} width="40px" height="40px" />
                 </div>
             </div>}
+        </div>
         </>
     )
   }  

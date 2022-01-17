@@ -9,7 +9,8 @@ class ListePlante extends Component {
     this.state = {
         plantName:'',
         likedPlant:[],
-        fav:''
+        fav:'',
+        toDisplay:''
     }
   }
 
@@ -27,15 +28,19 @@ class ListePlante extends Component {
 
   }
 
+  getDisplay = (val) => {
+    this.setState({toDisplay:val})
+    this.props.getDisplay(val)
+  }
+
 
   render() {
     return (
         <>
-        {this.state.plantName !== "" ? <Plant plantName={this.state.plantName} fav={true}/> : <div></div>}
-            
+        {this.state.plantName !== "" ? <Plant getDisplay={this.getDisplay} plantName={this.state.plantName} fav={true}/> : <div></div>}
             {
               this.state.likedPlant.map((element) => (
-                <Plant plantName={element.namePlant}/>
+                <Plant getDisplay={this.getDisplay} plantName={element.namePlant}/>
               ))
             }
         </>
