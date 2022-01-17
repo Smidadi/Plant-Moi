@@ -45,12 +45,11 @@ router.get('/Connexion/:userName/:password', async (req,res) => {
 //     done
 // );
 
-router.put('/plantLiked/:user/:plantName', async (req,res) => {
+router.put('/likedPlant/:user/:plantName', async (req,res) => {
     await userData.updateOne({
         userName: req.params.user,
-        $push: {likedPlant: {
-            namePlant: req.params.plantName,
-            note: ''
+        $addToSet: {likedPlant: {
+            namePlant: req.params.plantName
         }}
     }).then(() => res.send("Done"))
     .catch(() => res.send("Undone"))    
@@ -99,6 +98,17 @@ router.get('/likedPlant/:user', async (req, res) => {
     await userData.findOne({username: req.params.user})
                 .then(user => res.send(user.likedPlant))
                 .catch(() => res.send("error"));
+});
+
+router.get('/likedPlant/:user/:plantName', async (req,res) => {
+    await userData.findOne({userName: req.params.user})
+                    .then(user => {
+                        let ret = (user.likedPlant).filter(x => x.namePlant == req.params.plantName);
+                        if(ret.length == 0)
+                            res.send('NLiked');
+                        else
+                            res.send('Liked');
+                    })
 });
 
 router.delete('/LikedPlant/:user/:plantName', async (req, res) => {
