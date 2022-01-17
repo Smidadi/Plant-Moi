@@ -146,6 +146,15 @@ body {
     border-top: 2px solid white;
 }
 
+.listOfPlants {
+    border-right: 2px solid green;
+    border-bottom: 2px solid green;
+}
+
 .user {
     margin-right: 10px;
+}
+
+.rechercher {
+    margin-left: 40%;
 }
