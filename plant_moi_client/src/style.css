@@ -33,12 +33,15 @@ input[type=text] {
  }*/
 
 .connexion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-left: 2px solid;
     border-color: white;
     
     margin-top: 2%;
     margin-bottom: 2%;
-    padding-left:5%;
+    
 
 }
 
@@ -141,4 +144,8 @@ body {
     color:white;
     padding: 1%;
     border-top: 2px solid white;
+}
+
+.user {
+    margin-right: 10px;
 }
