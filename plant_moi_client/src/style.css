@@ -142,3 +142,8 @@ body {
     padding: 1%;
     border-top: 2px solid white;
 }
+
+.listOfPlants {
+    border-right: 2px solid green;
+    border-bottom: 2px solid green;
+}

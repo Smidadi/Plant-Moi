@@ -31,8 +31,7 @@ class PageProfil extends Component {
                     </div>
                 </div>  
             </div>
-            <div className="col-3">
-                
+            <div className="col-3 listOfPlants">
             </div>
             <div className="col-9">
                 
