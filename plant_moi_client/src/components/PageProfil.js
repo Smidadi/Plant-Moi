@@ -36,6 +36,19 @@ class PageProfil extends Component {
     })
   }
 
+  getNoteFromBDD = () => {
+    fetch("http://localhost:5000/user/note/" + this.localStorage.getItem("username") + "/" + this.state.toDisplay)
+    .then((res) =>res.json())
+    .then((json) => {
+      console.log(json)
+    });
+  }
+
+  componentDidUpdate = () => {
+    if(this.state.toDisplay !== '')
+      this.getNoteFromBDD()
+  }
+
   render() {
     return (
         <div className="container-fluid">
