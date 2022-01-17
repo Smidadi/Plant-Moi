@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const userControl = require('../src/userConroller');
 const userData = require('../models/userModels');
+const bcrypt  = require('bcrypt');
 
 
 /**
@@ -18,17 +19,23 @@ router.post('/Inscription', async (req,res) => {
     await userData.find()
             .then((users) => {
                 if((users.filter( (x) => x.userName == req.body.userName)).length === 0 & userControl.verifyInformation(req.body)){
-                    delete req.body._id;
-                    const user = new userData({
-                    ...req.body
-                    });
-                    user.save()
-                        .then( () => {
-                            res.send('Added');
-                        })
-                        .catch(() => {
-                            res.send("Failed");
+                    bcrypt.hash(req.body.password,10, (err,hash) => {
+                        if (err)
+                            return;
+                        delete req.body._id;
+                        const user = new userData({
+                            userName: req.body.userName,
+                            password: hash,
+                            email: req.body.email
                         });
+                        user.save()
+                            .then( () => {
+                                res.send('Added');
+                            })
+                            .catch(() => {
+                                res.send("Failed");
+                            });
+                    })
                 }
             })
             .catch(() => res.send({message:"Failed"}))
@@ -51,11 +58,12 @@ router.post('/Inscription', async (req,res) => {
 router.get('/Connexion/:userName/:password', async (req,res) => {
     await userData.find()
             .then((users) => {
-                if((users.filter( (x) => x.userName == req.params.userName & x.password == req.params.password)).length !== 0){
+                if((users.filter( async (x) => x.userName == req.params.userName & await bcrypt.compare(req.params.password, x.password))).length !== 0){
                     res.send('In');
                 }else{
                     res.send('Not in');  
-                }
+                }   
+                
             })
             .catch(() => res.send({message:"Failed"}))
     
