@@ -14,7 +14,7 @@ const userData = require('../models/userModels');
  *                  'Failed':
  *                      description: a problem occurs       
  */
-router.post('/User/Inscription', async (req,res) => {
+router.post('/Inscription', async (req,res) => {
     await userData.find()
             .then((users) => {
                 if((users.filter( (x) => x.userName == req.body.userName)).length === 0 & userControl.verifyInformation(req.body)){
