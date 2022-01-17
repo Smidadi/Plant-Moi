@@ -3,6 +3,7 @@ import '../style.css';
 import Research from './Research';
 import Authentification from './Authentification';
 import ListePlante from './ListePlante';
+import Api from './Api';
 
 
 class PageProfil extends Component {
@@ -11,8 +12,14 @@ class PageProfil extends Component {
     super(props);
     this.state = { 
       researchPlant: 'Rechercher une plante',
-      inputValue:''
+      inputValue:'',
+      toDisplay:''
     }
+  }
+
+  getDisplay = (val) => {
+    this.setState({toDisplay:val})
+    console.log(val)
   }
 
   render() {
@@ -33,10 +40,12 @@ class PageProfil extends Component {
                 </div>  
             </div>
             <div className="col-2 listOfPlants">
-              <ListePlante />
+              <ListePlante getDisplay={this.getDisplay}/>
             </div>
             <div className="col-10">
-                
+              <div className="row">
+                <Api inputValue={this.state.toDisplay}/>
+              </div>
             </div>
         </div>
     )
