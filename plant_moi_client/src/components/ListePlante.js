@@ -26,19 +26,16 @@ class ListePlante extends Component {
 
   }
 
-  test = () => {
-    let res;
-      for(let i = 0; i < this.state.likedPlant.length; ++i) {
-          res += <Plant plantName={this.state.likedPlant[i].namePlant}/>
-      }
-      return res;
-  }
 
   render() {
     return (
         <>
             <Plant plantName={this.state.plantName}/>
-            {test()}
+            {
+              this.state.likedPlant.map((element) => (
+                <Plant plantName={element.namePlant}/>
+              ))
+            }
         </>
     )
   }  
