@@ -191,3 +191,7 @@ body {
 .replaceText {
     padding-top:3%;
 }
+
+#resizeImg {
+    height: 50vh;
+}

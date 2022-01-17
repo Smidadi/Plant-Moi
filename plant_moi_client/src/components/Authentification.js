@@ -6,7 +6,7 @@ import deco from '../img/se-deconnecter.png'
 class Authentification extends Component { 
   
   deco = () => {
-    alert("Vous êtes déconnecté")
+    alert("Vous êtes déconnecté.")
     localStorage.setItem("connected", "false")
     localStorage.setItem("username", "")
     window.location.href = "/"

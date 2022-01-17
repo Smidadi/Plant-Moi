@@ -7,7 +7,7 @@ class Research extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      researchPlant: 'Rechercher une plante',
+      researchPlant: this.props.placeholder,
       inputValue:'',
       propositions:["Pilea","Monstera","Calathea","Alocasia"]
     }

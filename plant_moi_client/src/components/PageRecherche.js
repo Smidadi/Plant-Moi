@@ -8,7 +8,7 @@ class PageRecherche extends Component {
     constructor(props){
         super(props)
         this.state = {
-            resultResearch:'',
+            resultResearch:'Rechercher une plante',
             inputValue:'Pilea',
             submit: false
         }
@@ -26,7 +26,7 @@ class PageRecherche extends Component {
                 <div className="row bar"> 
                     <div className="container">
                         <div className="row">
-                            <Research inputValue={this.state.inputValue} searchBarValue={this.searchBarValue}/>
+                            <Research inputValue={this.state.inputValue} searchBarValue={this.searchBarValue} placeholder={this.state.resultResearch}/>
                             <Authentification />
                         </div>
                     </div>  

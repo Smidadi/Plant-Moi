@@ -154,6 +154,9 @@ class Api extends Component {
                 });
             }
         }
+        else {
+            alert("Pour liker cette plante, inscris-toi ou connecte-toi !")
+        }
     }
 
     changeLove = () => { 
@@ -183,11 +186,11 @@ class Api extends Component {
                 })
             }
         }
+        else {
+            alert("Pour aimer cette plante, inscris-toi ou connecte-toi !")
+        }
         
     }
-
-
-    /* A regler ici : si pas d'images -> ne pas l'afficher ; si plante pas dans l'api : ne rien mettre dans les champs ou message d'erreur ; mettre un bouton favoris pour l'ajouter dans la page de profil ; mettre un bouton add pour la mettre dans notre liste de plante dans profil */
 
     render() {
         return (
@@ -204,7 +207,7 @@ class Api extends Component {
             </div>
             
             <div className="plantInfo col-6 marge_left"> 
-                <div className="row"> {this.state.img === undefined ? <div className="noImage"><span>Pas d'image pour cette plante</span></div> :<img src={this.state.img} width="50%" height="50%"/>} </div>
+                <div className="row"> {this.state.img === undefined ? <div className="noImage"><span>Pas d'image pour cette plante</span></div> :<img id="resizeImg" src={this.state.img} width="auto" max-height="auto"/>} </div>
             </div>
             <div className="plantInfo col-6 marge_right"> 
                 <div className="row">
