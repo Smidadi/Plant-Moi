@@ -54,7 +54,7 @@ class Research extends Component {
             <datalist id="propositions">
               {this.state.propositions.map((element, i) => <option value={element}></option>)}
             </datalist>
-            <button className="btnclick" onClick={this.rechercher}><img src={research} alt="rechercher" width="40px" height="40px"/></button>
+            <button className="btnclick" onClick={this.rechercher}><img src={research} className="rechercher" alt="rechercher" width="40px" height="40px"/></button>
         </div> 
     )
   }  
