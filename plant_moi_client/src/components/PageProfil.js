@@ -39,12 +39,14 @@ class PageProfil extends Component {
                     </div>
                 </div>  
             </div>
-            <div className="col-2 listOfPlants">
-              <ListePlante getDisplay={this.getDisplay}/>
-            </div>
-            <div className="col-10">
-              <div className="row">
-                <Api inputValue={this.state.toDisplay}/>
+            <div className="row">
+              <div className="col-2 listOfPlants">
+                <ListePlante getDisplay={this.getDisplay}/>
+              </div>
+              <div className="col-10">
+                <div className="row">
+                  {this.state.toDisplay !== '' ? <Api inputValue={this.state.toDisplay}/> : <div></div>}
+                </div>
               </div>
             </div>
         </div>
