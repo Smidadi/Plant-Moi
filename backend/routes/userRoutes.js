@@ -137,7 +137,7 @@ router.get('/favPlant/:user', async (req,res) => {
 });
 
 router.get('/likedPlant/:user', async (req, res) => {
-    await userData.findOne({username: req.params.user})
+    await userData.findOne({userName: req.params.user})
                 .then(user => res.send(user.likedPlant))
                 .catch(() => res.send("error"));
 });
