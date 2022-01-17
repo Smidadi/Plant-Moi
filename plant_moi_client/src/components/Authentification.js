@@ -18,7 +18,7 @@ class Authentification extends Component {
           <Link to={(localStorage.getItem("connected") === "true") ? "/Profil" : "/Connexion"}>
             <img src={connexionImg} alt="Logo de connexion" width="90px" height="90px"/>
           </Link>
-          {localStorage.getItem("connected") === "true" ? <button className="btnclick" onClick={this.deco}><img src={deco} width="50px"></img></button> : <div></div>}
+          {localStorage.getItem("connected") === "true" ? <button className="btnclick" onClick={this.deco}><img src={deco} width="70px"></img></button> : <div></div>}
           
         </div>
         

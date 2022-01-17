@@ -135,3 +135,10 @@ body {
     padding-top:1%;
     padding-left: 1%;
 }
+
+.replaceUserName {
+    text-align: center;
+    color:white;
+    padding: 1%;
+    border-top: 2px solid white;
+}
