@@ -18,8 +18,22 @@ class PageProfil extends Component {
     }
   }
 
-  getDisplay = (val, text) => {
-    this.setState({toDisplay:val, text:text})
+  getDisplay = (val) => {
+    this.setState({toDisplay:val})
+  }
+  handleChange = (event) => {
+    this.setState({text:event.target.value})
+    this.sendToBDD()
+  }
+
+  sendToBDD = () => {
+    fetch("http://localhost:5000/user/note/" + this.localStorage.getItem("username") + "/" + this.state.toDisplay , {
+      method:"PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        note:this.state.text
+        })
+    })
   }
 
   render() {
@@ -49,9 +63,11 @@ class PageProfil extends Component {
                 </div>
               </div>
             </div>
+            {this.state.toDisplay !== '' ?
             <div className="row">
-                <textarea class="form-control z-depth-1 textarea" id="exampleFormControlTextarea6" rows="10" placeholder="Write something here..."></textarea>
+                <textarea onChange={this.handleChange} className="form-control z-depth-1 textarea" id="exampleFormControlTextarea6" rows="10" placeholder="Petite note pour cette plante"></textarea>
             </div>
+            : <div className="row"></div>}
         </div>
     )
   }  
