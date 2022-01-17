@@ -368,6 +368,14 @@ router.get('/note/:user/:plantName', async (req,res) => {
         res.send(note);
     })
     .catch(() => res.send('error'));
+});
+
+router.put('/note/:user/:plantName', async (req,res) => {
+    await userData.updateOne(
+        {userName: req.params.user, likedPlant: plantName},
+        {$set: { "note.$": req.body.text}}
+    ).then(() => res.send("Done"))
+    .catch(() => res.send('Undone'))
 })
 
 module.exports = router;
