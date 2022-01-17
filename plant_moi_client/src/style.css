@@ -110,6 +110,7 @@ input[type=text] {
     border: none;
     background-color: transparent;
     cursor: pointer;
+    color: white;
 }
 
 body {
