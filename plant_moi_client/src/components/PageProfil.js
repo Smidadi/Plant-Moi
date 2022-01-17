@@ -10,7 +10,7 @@ class PageProfil extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      researchPlant: 'Rechercher une plante',
+      researchPlant: 'Rechercher un utilisateur',
       inputValue:''
     }
   }
@@ -21,7 +21,7 @@ class PageProfil extends Component {
             <div className="row bar"> 
                 <div className="container">
                     <div className="row">
-                      <Research inputValue={this.state.inputValue} searchBarValue={this.searchBarValue}/>
+                      <Research inputValue={this.state.inputValue} searchBarValue={this.searchBarValue} placeholder={this.state.researchPlant}/>
                       <Authentification />
                     </div>
                     <div className="row">
