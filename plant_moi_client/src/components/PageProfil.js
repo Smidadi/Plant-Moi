@@ -13,13 +13,13 @@ class PageProfil extends Component {
     this.state = { 
       researchPlant: 'Rechercher un utilisateur',
       inputValue:'',
-      toDisplay:''
+      toDisplay:'',
+      text:''
     }
   }
 
-  getDisplay = (val) => {
-    this.setState({toDisplay:val})
-    console.log(val)
+  getDisplay = (val, text) => {
+    this.setState({toDisplay:val, text:text})
   }
 
   render() {
@@ -44,10 +44,13 @@ class PageProfil extends Component {
                 <ListePlante getDisplay={this.getDisplay}/>
               </div>
               <div className="col-10">
-                <div className="row">
+                <div className="row api">
                   {this.state.toDisplay !== '' ? <Api inputValue={this.state.toDisplay}/> : <div></div>}
                 </div>
               </div>
+            </div>
+            <div className="row">
+                <textarea class="form-control z-depth-1 textarea" id="exampleFormControlTextarea6" rows="10" placeholder="Write something here..."></textarea>
             </div>
         </div>
     )
