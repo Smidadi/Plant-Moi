@@ -168,12 +168,16 @@ body {
     border: 2px solid rgb(211, 86, 134);
     padding: 2%;
     margin:5%;
+    background-color: white;
+    border-radius: 5px;
 }
 
 .favPlant {
     border: 2px solid yellow;
     padding: 2%;
     margin:5%;
+    background-color: white;
+    border-radius: 5px;
 }
 
 .replaceText {
