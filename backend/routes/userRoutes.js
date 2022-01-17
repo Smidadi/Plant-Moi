@@ -361,7 +361,7 @@ router.get('/:user', async (req,res) => {
 
 router.get('/note/:user/:plantName', async (req,res) => {
     await userData.findOne(
-        {userName: user}
+        {userName: req.params.user}
     ).then(user => {
         let plant = (user.likedPlant).filter(x => x.namePlant == req.params.plantName);
         let note = plant[0].note;

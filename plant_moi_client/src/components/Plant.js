@@ -5,13 +5,6 @@ import is_loved from "../img/star_full.png"
 
 class Plant extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      text:''
-  }
-  }
-
   sendPlant = () => {
     this.props.getDisplay(this.props.plantName)
   }
@@ -20,13 +13,13 @@ class Plant extends Component {
     return (
         <>
         <div onClick={this.sendPlant}>
-            {this.props.fav == true ? 
+            {this.props.fav === true ? 
             <div className="row plant fav">
                 <div className="col-9 replaceText">
                     {this.props.plantName} 
                 </div>
                 <div className="col-3">
-                    <img src={is_loved} width="40px" height="40px" />
+                    <img src={is_loved} alt="coeur vide pas like" width="40px" height="40px" />
                 </div>
             </div> 
             : 
@@ -35,7 +28,7 @@ class Plant extends Component {
                     {this.props.plantName} 
                 </div>
                 <div className="col-3">
-                    <img src={is_liked} width="40px" height="40px" />
+                    <img src={is_liked} alt="coeur de like" width="40px" height="40px" />
                 </div>
             </div>}
         </div>
