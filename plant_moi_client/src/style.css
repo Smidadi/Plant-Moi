@@ -114,6 +114,8 @@ input[type=text] {
     background-color: transparent;
     cursor: pointer;
     color: white;
+    font-family: "Open Sans";
+    font-weight: lighter;
 }
 
 body {
@@ -146,11 +148,6 @@ body {
     border-top: 2px solid white;
 }
 
-.listOfPlants {
-    border-right: 2px solid green;
-    border-bottom: 2px solid green;
-}
-
 .user {
     margin-right: 10px;
 }
@@ -159,8 +156,30 @@ body {
     margin-left: 40%;
 }
 
-.tablePlant {
+
+.listOfPlants {
+    border-right: 2px solid green;
+    border-bottom: 2px solid green;
+    color:green;
+    font-family: "Open Sans";
+}
+
+.likedPlants {
+    border: 2px solid rgb(211, 86, 134);
+    padding: 2%;
+    margin:5%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.favPlant {
     border: 2px solid yellow;
     padding: 2%;
-    margin:2%;
+    margin:5%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.replaceText {
+    padding-top:3%;
 }

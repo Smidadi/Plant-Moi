@@ -32,10 +32,10 @@ class PageProfil extends Component {
                     </div>
                 </div>  
             </div>
-            <div className="col-3 listOfPlants">
+            <div className="col-2 listOfPlants">
               <ListePlante />
             </div>
-            <div className="col-9">
+            <div className="col-10">
                 
             </div>
         </div>
