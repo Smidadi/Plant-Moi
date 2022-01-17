@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../style.css';
-import Research from './Research';
+import ResearchUser from './ResearchUser';
 import Authentification from './Authentification';
 import ListePlante from './ListePlante';
 import Api from './Api';
@@ -28,7 +28,7 @@ class PageProfil extends Component {
             <div className="row bar"> 
                 <div className="container">
                     <div className="row">
-                      <Research inputValue={this.state.inputValue} searchBarValue={this.searchBarValue} placeholder={this.state.researchPlant}/>
+                      <ResearchUser inputValue={this.state.inputValue} searchBarValue={this.searchBarValue} placeholder={this.state.researchPlant}/>
                       <Authentification />
                     </div>
                     <div className="row">
