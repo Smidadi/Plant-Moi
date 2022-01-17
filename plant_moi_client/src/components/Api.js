@@ -127,14 +127,16 @@ class Api extends Component {
         if(localStorage.getItem('connected') == 'true'){
 
             if(this.state.like == like){
+                
                 fetch('http://localhost:5000/user/likedPlant/'+localStorage.getItem('username')+'/'+this.state.name,{
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' }
                 })
                 .then(response => {
                     response.text().then(text => {
-                        if(text == 'Done')
-                        this.setState({like: is_liked})
+                        if(text == 'Done'){
+                            this.setState({like: is_liked})
+                        }
                     })
                     
                     
@@ -147,7 +149,7 @@ class Api extends Component {
                 .then(response => {
                     response.text().then(text => {
                         if(text == 'Done')
-                        this.setState({like: like});
+                            this.setState({like: like});
                     });
                 });
             }
@@ -165,7 +167,7 @@ class Api extends Component {
                 .then(response => {
                     response.text().then(text => {
                         if(text == 'Done')
-                        this.setState({love: is_loved})
+                            this.setState({love: is_loved})
                     })
                 })
             }else{
@@ -176,7 +178,7 @@ class Api extends Component {
                 .then(response => {
                     response.text().then(text => {
                         if(text == 'Done')
-                        this.setState({love: love})
+                            this.setState({love: love})
                     })
                 })
             }

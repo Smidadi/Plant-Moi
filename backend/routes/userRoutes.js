@@ -85,27 +85,29 @@ router.get('/Connexion/:userName/:password', async (req,res) => {
  *                      description: The plant hasn't been had in the database       
  */
 router.put('/likedPlant/:user/:plantName', async (req,res) => {
-    await userData.updateOne({
-        userName: req.params.user,
-        $addToSet: {likedPlant: {
+    await userData.updateOne(
+        {userName: req.params.user},
+        {$addToSet: {likedPlant: {
             namePlant: req.params.plantName
         }}
-    }).then(() => res.send("Done"))
-    .catch(() => res.send("Undone"))    
+    }).then((x) => res.send('Done'))
+    .catch((x) => res.send("Undone"))
 });
 
 router.put('/favPlant/:user/:plantName', async (req,res) => {
     let favPlant;
+    console.log(req.params);
     await userData.findOne({userName: req.params.user})
                 .then(user => {
                     favPlant = ((user.likedPlant).filter(x => x.namePlant == req.params.plantName))[0];
                 })
 
     let note;
+    
     if(typeof(favPlant)=='undefined'){
         await userData.updateOne({
-            userName: req.params.user,
-            favoritePlant: {
+            userName: req.params.user},
+            {favoritePlant: {
                 namePlant: req.params.plantName,
                 note: ''
             },
@@ -117,10 +119,10 @@ router.put('/favPlant/:user/:plantName', async (req,res) => {
         .catch(() => res.send("Undone"));
     }else{
         await userData.updateOne({
-            userName: req.params.user,
-            favoritePlant: {
+            userName: req.params.user},
+            {favoritePlant: {
                 namePlant: req.params.plantName,
-                note: ''
+                note: note
             }
         }).then(() => res.send("Done"))
         .catch(() => res.send("Undone"));
@@ -128,7 +130,8 @@ router.put('/favPlant/:user/:plantName', async (req,res) => {
 });
 
 router.get('/favPlant/:user', async (req,res) => {
-    await userData.findOne({username: req.params.user})
+
+    await userData.findOne({userName: req.params.user})
                 .then(user => res.send(user.favoritePlant))
                 .catch(() => res.send("error"));
 });
@@ -151,9 +154,9 @@ router.get('/likedPlant/:user/:plantName', async (req,res) => {
 });
 
 router.delete('/LikedPlant/:user/:plantName', async (req, res) => {
-    await userData.updateOne({
-        userName: req.params.user,
-        $pull: {likedPlant: {namePlant: req.params.plantName}}
+    await userData.updateOne(
+        {userName: req.params.user},
+        {$pull: {likedPlant: {namePlant: req.params.plantName}}
     })
     .then(() => res.send('Done'))
     .catch(() => res.send('Undone'));
@@ -161,8 +164,8 @@ router.delete('/LikedPlant/:user/:plantName', async (req, res) => {
 
 router.delete('/favPlant/:user', async (req,res) => {
     await userData.updateOne({
-        userName: req.params.user,
-        $unset: {favoritePlant: ""}
+        userName: req.params.user},
+        {$unset: {favoritePlant: ""}
     })
     .then(() => res.send('Done'))
     .catch(() => res.send('Undone'));
