@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../style.css';
 import Research from './Research';
 import Authentification from './Authentification';
+import ListePlante from './ListePlante';
 
 
 class PageProfil extends Component {
@@ -32,6 +33,7 @@ class PageProfil extends Component {
                 </div>  
             </div>
             <div className="col-3 listOfPlants">
+              <ListePlante />
             </div>
             <div className="col-9">
                 

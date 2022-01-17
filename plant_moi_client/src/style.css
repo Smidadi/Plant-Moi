@@ -158,3 +158,9 @@ body {
 .rechercher {
     margin-left: 40%;
 }
+
+.tablePlant {
+    border: 2px solid yellow;
+    padding: 2%;
+    margin:2%;
+}
