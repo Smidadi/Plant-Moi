@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { Link, Navigate } from "react-router-dom";
-import {ReactSession} from 'react-client-session';
 import '../style.css';
 import Field from './Field';
 import Logo from '../components/Logo'
 
-
-import UserProfile from '../UserProfile';
 
 class PageConnexion extends Component {
     constructor(props){
@@ -46,7 +43,7 @@ class PageConnexion extends Component {
 
     componentDidUpdate = async () => {
         if(!this.state.submit){
-            await fetch('http://localhost:5000/user/Connexion/'+ this.state.username +"/" + this.state.password)
+            await fetch('http://localhost:5000/user/Connexion/'+ this.state.username + "/" + this.state.password)
             .then(async (res) => {
                 const response = (await res.text()).toString();
                 this.setState({
