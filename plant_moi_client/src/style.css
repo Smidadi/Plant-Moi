@@ -195,3 +195,26 @@ body {
 #resizeImg {
     height: 50vh;
 }
+
+#style-15::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+#style-15::-webkit-scrollbar
+{
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+#style-15::-webkit-scrollbar-thumb
+{
+    background-color: green;
+}
+
+.textarea {
+    margin: 5%;
+    border: 3px solid green;
+}

@@ -1,8 +1,8 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import '../style.css';
-import like from "../img/heart.png"
+import not_like from "../img/heart.png"
 import is_liked from "../img/heart_full.png"
-import love from "../img/star.png"
+import not_love from "../img/star.png"
 import is_loved from "../img/star_full.png"
 import SimpleMap from './SimpleMap';
 
@@ -16,15 +16,19 @@ class Api extends Component {
             family:'',
             statePlant:'',
             img:'',
-            url:'http://purl.org/dc/terms/identifier',
-            like:like,
-            love:love,
-            latlng:[0, 0]
+            like:not_like,
+            love:not_love,
+            latlng:[0, 0],
+            notFirstTime:false
         }
     }
 
+    /**
+     * fonction qui recupere les valeurs a afficher pour la Pilea
+     * Affichage page d'accueil
+     */
     componentDidMount = () => {
-        if(this.state.name != this.props.inputValue){
+        if(this.state.name !== this.props.inputValue && this.state.notFirstTime===false){
             fetch("https://api.gbif.org/v1/species/match?name=Pilea")
             .then((res) =>res.json())
             .then((json) => {
@@ -57,11 +61,15 @@ class Api extends Component {
 
                 })  
             })
+            this.setState({notFirstTime:true})
         }     
     }
 
+    /**
+     * Recupere le nom de la plante a chercher dans l'API
+     */
     componentDidUpdate = () => {
-        if(this.state.name != this.props.inputValue){
+        if(this.state.name !== this.props.inputValue){
             fetch("https://api.gbif.org/v1/species/match?name="+ this.props.inputValue)
             .then((res) =>res.json())
             .then((json) => {
@@ -73,10 +81,10 @@ class Api extends Component {
                 fetch("http://localhost:5000/user/likedPlant/"+localStorage.getItem('username')+'/'+json.canonicalName)
                 .then(response => {
                     response.text().then(text => {
-                        if(text == 'Liked')
+                        if(text === 'Liked')
                             this.setState({like: is_liked});
                         else
-                            this.setState({like: like});
+                            this.setState({like: not_like});
                     })
                 })
 
@@ -86,7 +94,7 @@ class Api extends Component {
                         if((JSON.parse(text)).namePlant == this.state.name)
                             this.setState({love: is_loved});
                         else
-                            this.setState({love: love});
+                            this.setState({love: not_love});
                     })
                 })
                 this.setState({
@@ -124,9 +132,9 @@ class Api extends Component {
     }
 
     changeLike = () => { 
-        if(localStorage.getItem('connected') == 'true'){
+        if(localStorage.getItem('connected') === 'true'){
 
-            if(this.state.like == like){
+            if(this.state.like === not_like){
                 
                 fetch('http://localhost:5000/user/likedPlant/'+localStorage.getItem('username')+'/'+this.state.name,{
                     method: 'PUT',
@@ -149,7 +157,7 @@ class Api extends Component {
                 .then(response => {
                     response.text().then(text => {
                         if(text == 'Done')
-                            this.setState({like: like});
+                            this.setState({like: not_like});
                     });
                 });
             }
@@ -162,7 +170,7 @@ class Api extends Component {
     changeLove = () => { 
         if(localStorage.getItem('connected') == 'true'){
 
-            if(this.state.love == love){
+            if(this.state.love == not_love){
                 fetch('http://localhost:5000/user/favPlant/'+localStorage.getItem('username')+'/'+this.state.name,{
                     method: 'PUT',
                     headers: {'Content-Type': 'application/json'}
@@ -181,7 +189,7 @@ class Api extends Component {
                 .then(response => {
                     response.text().then(text => {
                         if(text == 'Done')
-                            this.setState({love: love})
+                            this.setState({love: not_love})
                     })
                 })
             }

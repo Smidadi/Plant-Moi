@@ -343,6 +343,31 @@ router.delete('/favPlant/:user', async (req,res) => {
     })
     .then(() => res.send('Done'))
     .catch(() => res.send('Undone'));
+});
+
+router.get('/:user', async (req,res) => {
+    await userData.findOne(
+        {userName: req.params.user}
+        ).then((user) => {  
+            let ret = {
+                username: user.userName,
+                favoritePlant: user.favoritePlant,
+                likedPlant: user.likedPlant
+            };
+            res.send(ret);
+        })
+        .catch(() => res.send('Not In'));
+});
+
+router.get('/note/:user/:plantName', async (req,res) => {
+    await userData.findOne(
+        {userName: user}
+    ).then(user => {
+        let plant = (user.likedPlant).filter(x => x.namePlant == req.params.plantName);
+        let note = plant[0].note;
+        res.send(note);
+    })
+    .catch(() => res.send('error'));
 })
 
 module.exports = router;
