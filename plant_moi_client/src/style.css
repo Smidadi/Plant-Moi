@@ -159,8 +159,18 @@ body {
     margin-left: 40%;
 }
 
-.tablePlant {
+.likedPlants {
+    border: 2px solid rgb(211, 86, 134);
+    padding: 2%;
+    margin:2%;
+}
+
+.favPlant {
     border: 2px solid yellow;
     padding: 2%;
     margin:2%;
+}
+
+.replaceText {
+    padding-top:3%;
 }

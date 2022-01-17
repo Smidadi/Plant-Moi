@@ -8,7 +8,8 @@ class ListePlante extends Component {
     super(props);
     this.state = {
         plantName:'',
-        likedPlant:[]
+        likedPlant:[],
+        fav:''
     }
   }
 
@@ -30,7 +31,7 @@ class ListePlante extends Component {
   render() {
     return (
         <>
-            <Plant plantName={this.state.plantName}/>
+            <Plant plantName={this.state.plantName} fav={true}/>
             {
               this.state.likedPlant.map((element) => (
                 <Plant plantName={element.namePlant}/>
