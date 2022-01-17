@@ -110,6 +110,7 @@ input[type=text] {
     border: none;
     background-color: transparent;
     cursor: pointer;
+    color: white;
 }
 
 body {
@@ -135,6 +136,9 @@ body {
     padding-left: 1%;
 }
 
-.user {
-    margin: 18px;
+.replaceUserName {
+    text-align: center;
+    color:white;
+    padding: 1%;
+    border-top: 2px solid white;
 }

@@ -190,7 +190,7 @@ class Api extends Component {
     render() {
         return (
             <>
-            <div className="plantInfo col-11"> 
+            <div className="plantInfo col-11 marge_left"> 
                 <div className="row"> <div className="structInfo">Nom :&nbsp;</div>{this.state.name} </div>
                 <div className="row"> <div className="structInfo">Nom scientifique :&nbsp;</div>{this.state.scientificName} </div>
                 <div className="row"> <div className="structInfo">Famille :&nbsp;</div> {this.state.family} </div>
@@ -201,10 +201,10 @@ class Api extends Component {
                 <button type="button" className="like_and_love" onClick={() => this.changeLike()} ><img src={this.state.like} width="50px" height="50px"/></button> 
             </div>
             
-            <div className="plantInfo col-6"> 
+            <div className="plantInfo col-6 marge_left"> 
                 <div className="row"> {this.state.img === undefined ? <div className="noImage"><span>Pas d'image pour cette plante</span></div> :<img src={this.state.img} width="50%" height="50%"/>} </div>
             </div>
-            <div className="plantInfo col-6"> 
+            <div className="plantInfo col-6 marge_right"> 
                 <div className="row">
                 <SimpleMap LatLong={{lat: this.state.latlng[0],lng: this.state.latlng[1]}} zoom={3}/>
                 </div>

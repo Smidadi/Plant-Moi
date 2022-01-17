@@ -20,9 +20,14 @@ class PageProfil extends Component {
             <div className="row bar"> 
                 <div className="container">
                     <div className="row">
-                        <Research inputValue={this.state.inputValue} searchBarValue={this.searchBarValue}/>
-                        <Authentification />
-                        <p>User Name is: {localStorage.getItem("username")}</p>
+                      <Research inputValue={this.state.inputValue} searchBarValue={this.searchBarValue}/>
+                      <Authentification />
+                    </div>
+                    <div className="row">
+                      <div className="col-9"></div>
+                      <div className="col-3 replaceUserName">
+                        {localStorage.getItem("username")}
+                      </div>
                     </div>
                 </div>  
             </div>
