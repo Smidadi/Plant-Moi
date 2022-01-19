@@ -201,6 +201,7 @@ class Api extends Component {
     }
 
     render() {
+        console.log("state",this.state)
         return (
             <>
             <div className="plantInfo col-11 marge_left"> 
@@ -219,7 +220,7 @@ class Api extends Component {
             </div>
             <div className="plantInfo col-6 marge_right"> 
                 <div className="row">
-                <SimpleMap LatLong={{lat: this.state.latlng[0],lng: this.state.latlng[1]}} zoom={3}/>
+                <SimpleMap LatLong={{lat: this.state.latlng[0],lng: this.state.latlng[1]}} zoom={4}/>
                 </div>
             </div>
             </>

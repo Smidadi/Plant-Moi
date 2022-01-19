@@ -5,7 +5,14 @@ import GoogleMapReact from 'google-map-react';
 const AnyReactComponent = () => <div className="marker"></div>;
 
 class SimpleMap extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+    }
+}
   render() {
+    console.log(this.props.LatLong)
     return (
       <div style={{ height: '50vh', width: '100%' }}>
         <GoogleMapReact
