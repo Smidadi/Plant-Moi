@@ -18,9 +18,11 @@ class PageProfil extends Component {
     }
   }
 
-  getDisplay = (val) => {
-    this.setState({toDisplay:val})
-  }
+  
+
+  changeNote = (event) => {
+    this.setState({text:event.target.value});
+  } 
 
 
   sendToBDD = () => {
@@ -31,25 +33,37 @@ class PageProfil extends Component {
         note:this.state.text
         })
     })
-    .then(response => {
-      console.log("res", response)
-      response.text().then(text => {
-        console.log("ici", text)
-      })
-  })
-    //console.log("send", this.state.text)
   }
 
-  getNoteFromBDD = () => {
-    fetch("http://localhost:5000/user/note/" + localStorage.getItem("username") + "/" + this.state.toDisplay)
-    .then(response => {
-      console.log(response)
-      response.text().then(text => {
-        this.setState({text:text})
+  getNoteFromBDD = (val) => {
+    console.log(this.state.toDisplay);
+    fetch("http://localhost:5000/user/note/" + localStorage.getItem("username") + "/" + val)
+    .then(async response => {
+      await response.text().then(text => {
+        if(text ===" ")
+          this.setState({text:" "})
+        else
+          this.setState({text:text})
       })
-  })
+    })
+
   }
 
+  getDisplay = (val) => {
+    this.setState({toDisplay:val});
+    this.getNoteFromBDD(val);
+  }
+  
+
+  componentDidMount = async () => {
+    await fetch("http://localhost:5000/user/favPlant/"+localStorage.getItem("username"))
+    .then(async response => {
+      await response.text().then(text => {
+        this.setState({toDisplay: JSON.parse(text).namePlant})
+        this.getNoteFromBDD(this.state.toDisplay);
+      })
+    })
+  }
   render() {
     return (
         <div className="container-fluid">
@@ -69,20 +83,23 @@ class PageProfil extends Component {
             </div>
             <div className="row">
               <div className="col-2 listOfPlants" id="style-15">
-                <ListePlante getDisplay={this.getDisplay}/>
+                <ListePlante getDisplay={this.getDisplay} />
               </div>
               <div className="col-10">
                 <div className="row api">
-                  {this.state.toDisplay !== '' ? <Api inputValue={this.state.toDisplay}/> : <div></div>}
+                  {this.state.toDisplay !== '' ? <Api inputValue={this.state.toDisplay} onClick={this.getNoteFromBDD}/> : <div></div>}
                 </div>
               </div>
             </div>
-            {false/*this.state.toDisplay !== ''*/ ?
+            {(this.state.text) === " " ?
             <div className="row">
-                <textarea className="form-control z-depth-1 textarea" id="exampleFormControlTextarea6" rows="10" placeholder="Petite note pour cette plante"></textarea>
+                <textarea onChange={this.changeNote} className="form-control z-depth-1 textarea" id="exampleFormControlTextarea6" rows="10" placeholder="Petite note pour cette plante"></textarea>
                 <button className="submit" onClick={this.sendToBDD}>SUBMIT</button>
             </div>
-            : <div className="row"></div>}
+            : <div className="row">
+            <textarea onChange={this.changeNote} className="form-control z-depth-1 textarea" id="exampleFormControlTextarea6" rows="10" value={this.state.text}></textarea>
+            <button className="submit" onClick={this.sendToBDD}>SUBMIT</button>
+        </div>}
         </div>
     )
   }  
