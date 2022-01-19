@@ -9,15 +9,18 @@ class SimpleMap extends Component {
   constructor(props){
     super(props)
     this.state = {
+      lat:this.props.LatLong.lat,
+      lng:this.props.LatLong.lng
     }
-}
+  }
+
   render() {
-    console.log(this.props.LatLong)
+    console.log(this.props, this.state)
     return (
       <div style={{ height: '50vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyCsVx-GvAEBRgFQasy11e_XjlCwYkMpdN4" }}
-          defaultCenter={this.props.LatLong}
+          defaultCenter={this.state}
           defaultZoom={this.props.zoom}
         >
           <AnyReactComponent
